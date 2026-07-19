@@ -52,35 +52,47 @@ export const PERSONAL_INFO = {
     "Open Source Contributor",
     "Competitive Programmer"
   ],
-  bio: "Software Development Engineer and Machine Learning Engineer with a passion for designing scalable systems, training high-performance ML models, and building elegant web applications. Combining mathematical rigor with modern frontend craftsmanship to create software that leaves a lasting impact.",
-  email: "mahammadhussain.dev@gmail.com",
-  phone: "+91 XXXXX XXXXX",
-  github: "https://github.com",
-  linkedin: "https://linkedin.com/in",
-  location: "Lucknow, India"
+  bio: "Software Development Engineer and Machine Learning Engineer building scalable backend systems, predictive ML solutions, and polished web applications with a strong focus on reliability, impact, and clean engineering.",
+  email: "mahammadhussain1500@gmail.com",
+  phone: "+91 9866067069",
+  github: "https://github.com/Mahammad1500",
+  linkedin: "https://www.linkedin.com/in/dudekulamahammadhussain",
+  location: "Lucknow, Uttar Pradesh, India"
 };
 
 export const STATS = [
-  { label: "Problems Solved", value: 400, suffix: "+" },
+  { label: "Problems Solved", value: 500, suffix: "+" },
   { label: "Projects Built", value: 2, suffix: "+" },
-  { label: "Internships", value: 1, suffix: "" },
-  { label: "CGPA", value: 8.5, suffix: "" },
+  { label: "Internships", value: 2, suffix: "" },
+  { label: "CGPA", value: 8.35, suffix: "" },
   { label: "Experience", value: 6, suffix: "+ Months" }
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    company: "Flipkart",
-    role: "Software Development Engineer Intern",
-    duration: "Summer 2025",
+    company: "CoinDCX",
+    role: "Software Development Engineer Intern — Backend",
+    duration: "07/2026 — Present",
     location: "Bengaluru, India",
     achievements: [
-      "Engineered predictive machine learning models using XGBoost, Logistic Regression, and Causal Modeling on large-scale datasets.",
-      "Optimized feature engineering pipelines for user behavior analysis, improving data processing throughput and model training efficiency.",
-      "Assisted in deploying real-time prediction microservices designed for high availability and low latency during peak customer activity.",
-      "Quantified causal business impact and performance metrics via A/B testing, driving data-backed improvements to recommendation systems."
+      "Working with the Finance, Risk & Portfolio (FRP) engineering team to build backend services in Go and TypeScript for core financial and crypto trading workflows.",
+      "Implementing REST APIs and business logic for internal platform services with a strong focus on scalability, reliability, and production readiness.",
+      "Collaborating with cross-functional engineers to debug issues and ship meaningful features for the FRP platform."
     ],
-    skills: ["XGBoost", "Logistic Regression", "Causal Modeling", "LLMs", "Feature Engineering", "Python", "PySpark", "Machine Learning"]
+    skills: ["Go", "TypeScript", "REST APIs", "Backend Engineering", "Finance Systems", "Crypto Platforms"]
+  },
+  {
+    company: "Flipkart",
+    role: "Software Development Engineer Intern '26",
+    duration: "01/2026 — 06/2026",
+    location: "Bengaluru, India",
+    achievements: [
+      "Developed two end-to-end XGBoost-based ML models to predict customer social media escalations before and after agent intervention, enabling proactive support action.",
+      "Trained models on highly imbalanced large-scale datasets with 2.8Cr+ conversation-level records and 70K+ escalation cases, plus 60L+ agent-handled records with 65K+ escalation cases.",
+      "Built the complete ML pipeline with feature engineering, imbalance handling, threshold tuning, and evaluation optimization, and deployed it into the customer-care agent interface to flag high-risk cases in real time.",
+      "Performed logistic regression for week-over-week analysis and implemented causal modeling to uncover a 350+ bps controllable improvement opportunity."
+    ],
+    skills: ["Python", "SQL", "XGBoost", "Logistic Regression", "Causal Modeling", "Machine Learning", "GenAI", "LLMs"]
   }
 ];
 
@@ -88,38 +100,39 @@ export const PROJECTS: ProjectItem[] = [
   {
     id: "intervuex",
     title: "Intervuex",
-    shortDesc: "An AI-powered collaborative mock technical interview and feedback platform.",
-    longDesc: "A premium full-stack platform designed to run automated, real-time mock technical interviews. Includes collaborative coding rooms, auto-scheduling algorithms, and interactive candidate analytics.",
-    tech: ["React.js", "Node.js", "Express", "MongoDB", "Socket.io", "Tailwind CSS"],
-    githubUrl: "#",
-    liveUrl: "#",
+    shortDesc: "A full-stack interview scheduling platform with admin and HR workspaces, conflict-aware scheduling, and candidate analytics.",
+    longDesc: "Built a full-stack interview scheduling platform with separate Admin and HR workspaces, automatic conflict-aware panel scheduling, candidate pipeline tracking, and analytics dashboards. The system improves coordination and reduces manual interview overhead.",
+    tech: ["React.js", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT"],
+    githubUrl: "https://github.com/Mahammad1500/Intervuex",
+    liveUrl: "https://intervuex-nine.vercel.app",
     category: "Full Stack",
     features: [
-      "Collaborative whiteboard and code editor with real-time sync.",
-      "AI evaluation and detailed rating generation after interview completion.",
-      "Automated slot matcher for candidates and interviewers."
+      "Separate Admin and HR workspaces with role-based access.",
+      "Automatic conflict-aware interviewer scheduling for panel interviews.",
+      "Candidate pipeline tracking and analytics dashboards.",
+      "JWT-based authentication and workspace onboarding using unique Space Codes."
     ],
-    challenges: "Handling real-time synchronization of code editors and communication streams across highly latent network connections.",
-    impact: "Reduced HR scheduling friction by 40% and improved applicant preparation flow through actionable automated feedback.",
-    lessons: "Learned deep state syncing concepts in React and optimized Socket.io listeners to prevent message bottlenecks."
+    challenges: "Designing a scheduling system that balances interviewer availability, candidate slots, and real-world coordination constraints without creating conflicts.",
+    impact: "Cut manual interview coordination effort by approximately 60% and improved scheduling reliability for hiring teams.",
+    lessons: "Learned how to build dependable multi-role workflows and ship a production-ready platform with clear data modeling and authentication patterns."
   },
   {
     id: "feedback-portal",
     title: "Student Feedback Portal",
-    shortDesc: "A secure analytical feedback visualization dashboard for academic institutions.",
-    longDesc: "A secure dashboard designed to aggregate, analyze, and visualize feedback from university students. Integrates advanced natural language processing to cluster textual responses and detect sentiment, providing administrators with clean charts and actionable insights.",
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Python", "FastAPI", "Tailwind CSS"],
-    githubUrl: "#",
+    shortDesc: "A secure portal for collecting and analyzing student feedback with role-based access and privacy-focused workflows.",
+    longDesc: "Developed a web platform that replaces manual feedback collection with a secure digital workflow. The system supports Student, Teacher, and Admin roles and provides clear, privacy-safe handling of feedback data.",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JavaScript"],
+    githubUrl: "https://github.com/Mahammad1500/Student-Feedback-Portal",
     liveUrl: "#",
     category: "AI & Analytics",
     features: [
-      "SSO login integration and student response anonymization module.",
-      "Sentiment classification engine (FastAPI + HuggingFace Transformer).",
-      "Dynamic dashboard with multi-filter charts (PDF/CSV report generation)."
+      "Secure authentication for Student, Teacher, and Admin roles.",
+      "Digital feedback collection that reduces paperwork and manual processing.",
+      "Structured data handling designed for privacy and compliance."
     ],
-    challenges: "Ensuring student privacy through anonymization tokens while strictly enforcing the one-response-per-student constraint.",
-    impact: "Streamlined department-level feedback analysis, reducing manual spreadsheet reporting time by 75%.",
-    lessons: "Mastered PostgreSQL indexing strategies for analytical queries and implemented robust JWT-based security layers."
+    challenges: "Building a trusted feedback system that preserves privacy while offering a smooth experience for different academic roles.",
+    impact: "Reduced manual feedback processing workload by about 80% and improved the reliability of institutional reporting.",
+    lessons: "Gained strong experience in designing secure role-based systems and simplifying complex workflows into practical product features."
   }
 ];
 
@@ -128,97 +141,106 @@ export const SKILLS: SkillCategory[] = [
     title: "Programming Languages",
     items: [
       { name: "C++", level: 90 },
-      { name: "Python", level: 88 },
-      { name: "TypeScript", level: 85 },
-      { name: "JavaScript", level: 85 },
-      { name: "SQL", level: 80 }
+      { name: "Go", level: 84 },
+      { name: "Java", level: 78 },
+      { name: "Python", level: 92 },
+      { name: "JavaScript", level: 86 },
+      { name: "TypeScript", level: 88 },
+      { name: "SQL", level: 84 }
     ]
   },
   {
-    title: "Frameworks & Backend",
+    title: "Frameworks & Libraries",
     items: [
-      { name: "Next.js", level: 85 },
       { name: "React.js", level: 90 },
-      { name: "FastAPI", level: 80 },
-      { name: "Node.js", level: 82 },
-      { name: "Express", level: 85 }
+      { name: "Next.js", level: 86 },
+      { name: "Redux", level: 78 },
+      { name: "Node.js", level: 84 },
+      { name: "Express.js", level: 84 },
+      { name: "Tailwind CSS", level: 88 }
     ]
   },
   {
-    title: "Databases & ORMs",
+    title: "Databases",
     items: [
-      { name: "PostgreSQL", level: 82 },
       { name: "MongoDB", level: 85 },
-      { name: "Prisma", level: 84 },
-      { name: "Redis", level: 75 }
+      { name: "MySQL", level: 80 },
+      { name: "Firebase", level: 76 }
     ]
   },
   {
-    title: "Machine Learning & AI",
+    title: "Machine Learning & GenAI",
     items: [
       { name: "XGBoost", level: 88 },
       { name: "Logistic Regression", level: 92 },
-      { name: "Causal Modeling", level: 80 },
-      { name: "LLMs / Prompt Eng.", level: 82 },
-      { name: "Scikit-Learn", level: 85 }
+      { name: "Feature Engineering", level: 90 },
+      { name: "Causal Modeling", level: 82 },
+      { name: "GenAI", level: 84 },
+      { name: "LLM-based Summarization", level: 82 }
     ]
   },
   {
-    title: "Developer Tools & Cloud",
+    title: "Tools & Platforms",
     items: [
-      { name: "Docker", level: 80 },
-      { name: "Git & GitHub", level: 90 },
-      { name: "VS Code", level: 95 },
-      { name: "Vercel", level: 85 }
+      { name: "Git", level: 90 },
+      { name: "GitHub", level: 92 },
+      { name: "Linux", level: 84 },
+      { name: "VS Code", level: 95 }
     ]
   }
 ];
 
 export const ACHIEVEMENTS: AchievementItem[] = [
   {
-    title: "Amazon ML Summer School Scholar",
-    issuer: "Amazon India",
-    description: "Selected to participate in the intensive training camp covering Machine Learning, Deep Learning, NLP, and Large Scale Prediction Systems led by Amazon Scientists.",
-    date: "2025"
+    title: "The Polaris Fellowship 2026",
+    issuer: "Polaris School of Technology",
+    description: "Reached the top 1% of 10,000+ applicants across India after clearing four rigorous evaluation rounds for the Software Development Fellowship.",
+    date: "2026"
   },
   {
-    title: "Microsoft Campus Connect Facilitator",
-    issuer: "Microsoft India",
-    description: "Selected as a student facilitator to drive technical workshops, cloud computing meetups, and developer community engagements.",
+    title: "Amazon ML Summer School 2024",
+    issuer: "Amazon India",
+    description: "Selected as a mentee and explored supervised learning, deep neural networks, reinforcement learning, and generative AI with mentorship from Amazon scientists.",
     date: "2024"
   },
   {
-    title: "Competitive Programming Excellence",
-    issuer: "LeetCode & CodeChef",
-    description: "Solved 400+ problems across competitive programming platforms. Ranked in top percentiles, displaying strong algorithmic proficiency.",
-    date: "Ongoing"
+    title: "Microsoft Campus Connect Program 2024",
+    issuer: "Microsoft India",
+    description: "Selected among the top 100 quiz winners nationally and recognized for strong technical engagement.",
+    date: "2024"
   },
   {
-    title: "Hacktoberfest Contributor",
+    title: "Hacktoberfest 2023",
     issuer: "DigitalOcean / Open Source",
-    description: "Contributed to multiple web development and ML open-source repositories, completing verified pull requests.",
-    date: "2024, 2025"
+    description: "Completed a month-long open-source contribution challenge and merged 4 pull requests.",
+    date: "2023"
+  },
+  {
+    title: "LeetCode 500+ Problems",
+    issuer: "LeetCode",
+    description: "Built consistent problem-solving strength across data structures, algorithms, and competitive programming challenges.",
+    date: "Ongoing"
   }
 ];
 
 export const EDUCATION: EducationItem[] = [
   {
-    institution: "Indian Institute of Information Technology (IIIT), Lucknow",
-    degree: "Bachelor of Technology (B.Tech)",
-    duration: "2022 - 2026",
-    grade: "8.5 CGPA",
-    coursework: ["Data Structures & Algorithms", "Database Management Systems", "Machine Learning", "Operating Systems", "Web Development", "Object Oriented Programming"]
+    institution: "Indian Institute of Information Technology, Lucknow (IIITL)",
+    degree: "Bachelor of Technology in Computer Science",
+    duration: "Nov 2022 — June 2026",
+    grade: "CGPA: 8.35/10",
+    coursework: ["Operating Systems", "Software Engineering", "Computer Networks", "Machine Learning", "Data Structures and Algorithms", "Database Management Systems", "Object-Oriented Programming Systems"]
   },
   {
     institution: "Resonance Junior College",
-    degree: "Intermediate Education (Class XII)",
-    duration: "2020 - 2022",
-    grade: "95%+"
+    degree: "Intermediate (12th Grade)",
+    duration: "Nov 2020 — July 2022",
+    grade: "Percentage: 97.5%"
   },
   {
     institution: "Sri Chaitanya Techno School",
-    degree: "Secondary School Certificate (Class X)",
-    duration: "2020",
-    grade: "10.0 CGPA"
+    degree: "Secondary Education (10th Grade)",
+    duration: "July 2019 — April 2020",
+    grade: "Percentage: 99.20%"
   }
 ];

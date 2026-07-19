@@ -5,10 +5,11 @@ import { Terminal, Trophy, Cpu, Code, Flame } from "lucide-react";
 import { ACHIEVEMENTS } from "@/lib/data";
 
 const ACHIEVEMENT_ICONS: Record<string, React.ReactNode> = {
-  "Amazon ML Summer School Scholar": <Cpu className="w-6 h-6 text-amber-500" />,
-  "Microsoft Campus Connect Facilitator": <Trophy className="w-6 h-6 text-blue-500" />,
-  "Competitive Programming Excellence": <Code className="w-6 h-6 text-cyan-400" />,
-  "Hacktoberfest Contributor": <Flame className="w-6 h-6 text-red-500" />,
+  "The Polaris Fellowship 2026": <Trophy className="w-6 h-6 text-cyan-400" />,
+  "Amazon ML Summer School 2024": <Cpu className="w-6 h-6 text-amber-500" />,
+  "Microsoft Campus Connect Program 2024": <Trophy className="w-6 h-6 text-blue-500" />,
+  "Hacktoberfest 2023": <Flame className="w-6 h-6 text-red-500" />,
+  "LeetCode 500+ Problems": <Code className="w-6 h-6 text-cyan-400" />,
 };
 
 export default function Achievements() {

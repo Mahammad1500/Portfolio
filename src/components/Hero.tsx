@@ -43,7 +43,6 @@ export default function Hero() {
   }, [typedRole, isDeleting, roleIndex]);
 
   const handleResumeDownload = () => {
-    // Show confetti on resume download
     confetti({
       particleCount: 100,
       spread: 70,
@@ -51,8 +50,10 @@ export default function Hero() {
       colors: ["#2563EB", "#06B6D4", "#ffffff"],
     });
 
-    // Mock download action
-    alert("Resume download triggered! (Mahammad_Hussain_Resume.pdf)");
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleScrollTo = (id: string) => {
@@ -76,7 +77,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel-light text-cyan-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-6"
         >
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span>Available for Roles</span>
+          <span>SDE Intern @ CoinDCX • Jul 2026 – Present</span>
         </motion.div>
 
         {/* Hello Greeting */}
@@ -141,7 +142,7 @@ export default function Hero() {
             className="w-full sm:w-auto px-8 py-4 rounded-full glass-panel hover:bg-slate-800/80 text-white font-bold text-sm tracking-wider uppercase transition-all border border-slate-700 hover:border-slate-500 cursor-pointer flex items-center justify-center gap-2"
           >
             <FileText className="w-4 h-4 text-cyan-400" />
-            <span>Download Resume</span>
+            <span>Let&apos;s Connect</span>
           </button>
         </motion.div>
 

@@ -46,13 +46,13 @@ export default function About() {
 
             <div className="space-y-6 text-slate-300 text-base md:text-lg leading-relaxed">
               <p>
-                My journey into engineering stems from a deep curiosity about how complex systems process data and deliver user actions. As a student at <strong className="text-white">IIIT Lucknow</strong>, I've focused my academic and personal pursuits on developing core software engineering skills, working on algorithmic problems, and studying machine learning.
+                I am a Computer Science student at <strong className="text-white">IIIT Lucknow</strong> with a strong interest in backend engineering, machine learning, and building dependable software products. My work sits at the intersection of systems thinking, data-driven decision making, and product-focused development.
               </p>
               <p>
-                Whether it's training causal prediction models at <strong className="text-white">Flipkart</strong> using PySpark and XGBoost, or structuring real-time collaborative coding portals in node.js, I approach every project with a system-level mindset. I aim to write highly optimized, type-safe, and self-documenting code.
+                I am currently interning as a <strong className="text-white">Software Development Engineer Intern at CoinDCX</strong>, where I work on backend services in Go and TypeScript for financial and crypto workflows. Earlier, I contributed to machine learning initiatives at Flipkart, developing models for escalation prediction and causal insight generation.
               </p>
               <p>
-                I thrive in environments that challenge me to solve ambiguous, large-scale problems. I am continuously exploring the boundaries of AI, large language models, and predictive pipelines, looking for ways to translate complex theory into tangible user benefits.
+                I enjoy solving ambiguous problems, writing production-ready code, and connecting technical depth with user impact. Whether it is building scalable APIs, training models on large datasets, or shipping polished web experiences, I aim to create software that is thoughtful, reliable, and useful.
               </p>
             </div>
           </motion.div>

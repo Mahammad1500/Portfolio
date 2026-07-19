@@ -8,11 +8,10 @@ export default function CustomCursor() {
   const [hovered, setHovered] = useState(false);
   const [hidden, setHidden] = useState(false);
 
-  // Motion values for smooth cursor trailing
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 40, stiffness: 400, mass: 0.4 };
+  const springConfig = { damping: 28, stiffness: 320, mass: 0.25 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -26,24 +25,21 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (
+      const isInteractive = Boolean(
         target.tagName === "A" ||
         target.tagName === "BUTTON" ||
         target.closest("a") ||
         target.closest("button") ||
         target.closest('[role="button"]') ||
         target.classList.contains("clickable")
-      ) {
-        setHovered(true);
-      } else {
-        setHovered(false);
-      }
+      );
+
+      setHovered(isInteractive);
     };
 
     const handleMouseLeave = () => setHidden(true);
     const handleMouseEnter = () => setHidden(false);
 
-    // Only apply on non-touch desktop screens
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
     if (!isTouchDevice) {
       document.body.classList.add("custom-cursor-active");
@@ -68,25 +64,24 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Outer Glow Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-500/60 pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-cyan-400/70 pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
-          scale: hovered ? 1.8 : 1,
-          backgroundColor: hovered ? "rgba(6, 182, 212, 0.15)" : "rgba(6, 182, 212, 0)",
-          borderColor: hovered ? "rgba(6, 182, 212, 0.9)" : "rgba(6, 182, 212, 0.6)",
-          boxShadow: hovered ? "0 0 15px rgba(6, 182, 212, 0.4)" : "none",
+          scale: hovered ? 1.25 : 1,
+          backgroundColor: hovered ? "rgba(6, 182, 212, 0.14)" : "rgba(6, 182, 212, 0.04)",
+          borderColor: hovered ? "rgba(6, 182, 212, 0.92)" : "rgba(103, 232, 249, 0.65)",
+          boxShadow: hovered ? "0 0 16px rgba(6, 182, 212, 0.28)" : "0 0 8px rgba(6, 182, 212, 0.16)",
         }}
       />
-      {/* Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-blue-500 rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-cyan-400 rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2"
         style={{
           x: cursorX,
           y: cursorY,
-          scale: hovered ? 0.5 : 1,
+          scale: hovered ? 0.75 : 1,
+          boxShadow: hovered ? "0 0 10px rgba(34, 211, 238, 0.4)" : "none",
         }}
       />
     </>
