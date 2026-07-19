@@ -6,10 +6,43 @@ import { SKILLS } from "@/lib/data";
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   "Programming Languages": <Code className="w-5 h-5 text-cyan-400" />,
-  "Frameworks & Backend": <Cpu className="w-5 h-5 text-blue-500" />,
-  "Databases & ORMs": <Database className="w-5 h-5 text-purple-400" />,
-  "Machine Learning & AI": <Brain className="w-5 h-5 text-emerald-400" />,
-  "Developer Tools & Cloud": <Wrench className="w-5 h-5 text-amber-500" />,
+  "Frameworks & Libraries": <Cpu className="w-5 h-5 text-blue-500" />,
+  "Databases": <Database className="w-5 h-5 text-purple-400" />,
+  "Machine Learning & GenAI": <Brain className="w-5 h-5 text-emerald-400" />,
+  "Tools & Platforms": <Wrench className="w-5 h-5 text-amber-500" />,
+};
+
+const SKILL_SYMBOLS: Record<string, string> = {
+  "C++": "⚡",
+  "Go": "🐹",
+  "Java": "☕",
+  "Python": "🐍",
+  "JavaScript": "📜",
+  "TypeScript": "📘",
+  "SQL": "🔍",
+  "React.js": "⚛️",
+  "Next.js": "▲",
+  "Redux": "🔄",
+  "Node.js": "🟢",
+  "Express.js": "🚀",
+  "Tailwind CSS": "🎨",
+  "MongoDB": "🍃",
+  "MySQL": "🗄️",
+  "Firebase": "🔥",
+  "XGBoost": "🌳",
+  "Logistic Regression": "📊",
+  "Feature Engineering": "🔧",
+  "Causal Modeling": "🔗",
+  "GenAI": "🤖",
+  "LLM-based Summarization": "📝",
+  "Git": "🎯",
+  "GitHub": "🐙",
+  "Linux": "🐧",
+  "VS Code": "💻",
+  "GitHub Copilot": "✨",
+  "Cursor": "🎯",
+  "Windsurf": "🌊",
+  "Claude Code": "🤖"
 };
 
 export default function Skills() {
@@ -48,24 +81,11 @@ export default function Skills() {
               </h3>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-3">
               {cat.items.map((skill) => (
-                <div key={skill.name}>
-                  <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-                    <span>{skill.name}</span>
-                    <span className="text-cyan-400 font-normal">{skill.level}%</span>
-                  </div>
-                  
-                  {/* Progress track */}
-                  <div className="w-full h-1.5 rounded-full bg-slate-900 overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, ease: "easeOut" }}
-                      className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"
-                    />
-                  </div>
+                <div key={skill.name} className="flex items-center gap-2">
+                  <span className="text-lg">{SKILL_SYMBOLS[skill.name] || "•"}</span>
+                  <span className="text-sm font-medium text-slate-300">{skill.name}</span>
                 </div>
               ))}
             </div>

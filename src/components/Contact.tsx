@@ -38,20 +38,25 @@ export default function Contact() {
 
     setSending(true);
 
-    // Mock form submission timing
+    const subject = encodeURIComponent(`Portfolio contact from ${formData.name}`);
+    const body = encodeURIComponent(
+      `From: ${formData.name} (${formData.email})\n\n${formData.message}`
+    );
+    const mailtoLink = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+
     setTimeout(() => {
       setSending(false);
       setFormData({ name: "", email: "", message: "" });
-      showToast("Message sent successfully!");
-      
-      // Explosion confetti
+      showToast("Email client opened. You can now send your message!");
+
       confetti({
         particleCount: 80,
         spread: 60,
         origin: { y: 0.8 },
         colors: ["#06B6D4", "#2563EB", "#10B981"],
       });
-    }, 1500);
+    }, 800);
   };
 
   return (
@@ -95,7 +100,11 @@ export default function Contact() {
               Start a Conversation
             </h3>
             <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-10">
-              Have an opening, an interesting ML/AI problem to solve, or just want to chat about scalability? Reach out directly via the channels or drop a message here.
+              Have an opening, an interesting backend or ML problem to solve, or just want to chat about building strong products? Reach out directly via the channels below or drop a note here.
+            </p>
+            <p className="text-xs text-slate-500 mb-2 p-4 rounded-lg bg-slate-900/40 border border-slate-800/50 leading-relaxed">
+              <span className="font-semibold text-slate-300 block mb-2">✉️ How it works:</span> 
+              Fill out the form below and click <span className="font-bold text-cyan-400">Send</span>. Your email client will automatically open with your message ready to go. All you need to do is hit send! Messages go directly to <span className="text-cyan-400 font-semibold">{PERSONAL_INFO.email}</span>
             </p>
 
             <div className="space-y-6">

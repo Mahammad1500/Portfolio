@@ -41,12 +41,12 @@ export default function About() {
             </div>
             
             <h2 className="text-3xl md:text-5xl font-black font-title tracking-tight mb-8">
-              Engineering solutions at the intersection of <span className="text-cyan-400 font-extrabold">Data</span> and <span className="text-blue-500 font-extrabold">Web</span>.
+              Building the <span className="text-cyan-400 font-extrabold">backend</span> and <span className="text-blue-500 font-extrabold">intelligence</span> behind great products.
             </h2>
 
             <div className="space-y-6 text-slate-300 text-base md:text-lg leading-relaxed">
               <p>
-                I am a Computer Science student at <strong className="text-white">IIIT Lucknow</strong> with a strong interest in backend engineering, machine learning, and building dependable software products. My work sits at the intersection of systems thinking, data-driven decision making, and product-focused development.
+                I am a <strong className="text-white">Computer Science graduate from IIIT Lucknow</strong> with a strong interest in backend engineering, machine learning, and building dependable software products. My work sits at the intersection of systems thinking, data-driven decisions, and product-focused development.
               </p>
               <p>
                 I am currently interning as a <strong className="text-white">Software Development Engineer Intern at CoinDCX</strong>, where I work on backend services in Go and TypeScript for financial and crypto workflows. Earlier, I contributed to machine learning initiatives at Flipkart, developing models for escalation prediction and causal insight generation.

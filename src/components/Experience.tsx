@@ -38,7 +38,7 @@ export default function Experience() {
               {/* Corner decoration glow */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-500/5 to-transparent blur-xl pointer-events-none" />
 
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div>
                   <h3 className="text-2xl font-extrabold font-title text-white">
                     {exp.role}
@@ -59,6 +59,16 @@ export default function Experience() {
                     <MapPin className="w-3.5 h-3.5 text-blue-500" />
                     <span>{exp.location}</span>
                   </div>
+                  {exp.certificateLink && (
+                    <a
+                      href={exp.certificateLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 transition-all"
+                    >
+                      <span>🃄 Certificate</span>
+                    </a>
+                  )}
                 </div>
               </div>
 

@@ -74,10 +74,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel-light text-cyan-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-6"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel-light text-cyan-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-6 hidden"
         >
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span>SDE Intern @ CoinDCX • Jul 2026 – Present</span>
+          <span>Status</span>
         </motion.div>
 
         {/* Hello Greeting */}
@@ -85,9 +85,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-slate-400 text-lg md:text-2xl font-medium mb-3"
+          className="text-slate-400 text-base md:text-lg font-medium mb-3 tracking-wide"
         >
-          Hello 👋, I'm
+          I&apos;m a software engineer who builds backends, trains ML models, and ships full-stack products.
         </motion.h3>
 
         {/* Name Title */}
@@ -189,7 +189,7 @@ export default function Hero() {
       </div>
 
       {/* Mouse Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hidden md:flex">
         <span className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Scroll Down</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}

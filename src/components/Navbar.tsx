@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Moon, Sun } from "lucide-react";
+import { PERSONAL_INFO } from "@/lib/data";
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
@@ -19,8 +20,14 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
+    const storedTheme = window.localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
+    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const initialTheme = storedTheme ?? (prefersLight ? "light" : "dark");
+    setTheme(initialTheme);
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -54,6 +61,12 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("theme-light", theme === "light");
+    document.documentElement.classList.toggle("theme-dark", theme === "dark");
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const el = document.getElementById(id);
@@ -73,15 +86,13 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo - Hidden on dark mode, visible only when needed */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="text-xl font-bold font-title tracking-wider text-gradient flex items-center gap-2"
+            className="text-lg font-bold font-title tracking-wider text-gradient hidden"
           >
-            <span>H</span>
-            <span className="text-cyan-400 font-normal">.</span>
-            <span>H</span>
+            <span>Portfolio</span>
           </a>
 
           {/* Desktop Menu */}
@@ -107,8 +118,22 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Resume Download CTA */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2.5 rounded-full border border-slate-700/70 bg-slate-900/70 text-slate-300 hover:text-white hover:border-cyan-400/40 transition-all"
+              aria-label="Toggle color theme"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <a
+              href={PERSONAL_INFO.resumeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group px-5 py-2.5 rounded-full overflow-hidden border border-slate-400/30 hover:border-slate-600 text-xs font-semibold uppercase tracking-wider text-slate-600 hover:text-white flex items-center gap-1.5 transition-all duration-300"
+            >
+              <span className="relative z-10">📄 Resume</span>
+            </a>
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "contact")}
@@ -163,6 +188,13 @@ export default function Navbar() {
               ))}
             </nav>
 
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="mt-4 flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-slate-700 bg-slate-900/70 text-sm font-semibold uppercase tracking-wider text-slate-200"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              <span>Toggle Theme</span>
+            </button>
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "contact")}

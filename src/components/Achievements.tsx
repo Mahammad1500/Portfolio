@@ -58,6 +58,17 @@ export default function Achievements() {
               <p className="text-slate-400 text-sm md:text-base leading-relaxed">
                 {ach.description}
               </p>
+              {ach.link && (
+                <a
+                  href={ach.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-3 text-xs font-semibold uppercase tracking-widest text-cyan-400 hover:text-cyan-300 transition-colors"
+                >
+                  <span>View Link</span>
+                  <span aria-hidden>↗</span>
+                </a>
+              )}
             </div>
           </motion.div>
         ))}

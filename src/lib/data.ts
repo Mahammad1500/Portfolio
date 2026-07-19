@@ -5,6 +5,7 @@ export interface ExperienceItem {
   location: string;
   achievements: string[];
   skills: string[];
+  certificateLink?: string;
 }
 
 export interface ProjectItem {
@@ -32,6 +33,7 @@ export interface AchievementItem {
   issuer: string;
   description: string;
   date: string;
+  link?: string;
 }
 
 export interface EducationItem {
@@ -46,23 +48,22 @@ export const PERSONAL_INFO = {
   name: "Mahammad Hussain",
   roles: [
     "Software Development Engineer",
+    "Backend Engineer",
     "Machine Learning Engineer",
-    "Full Stack Developer",
-    "AI Engineer",
-    "Open Source Contributor",
-    "Competitive Programmer"
+    "Full Stack Developer"
   ],
-  bio: "Software Development Engineer and Machine Learning Engineer building scalable backend systems, predictive ML solutions, and polished web applications with a strong focus on reliability, impact, and clean engineering.",
+  bio: "Computer Science graduate from IIIT Lucknow building reliable backend systems, intelligent products, and polished full-stack experiences with a strong focus on impact and engineering quality.",
   email: "mahammadhussain1500@gmail.com",
   phone: "+91 9866067069",
   github: "https://github.com/Mahammad1500",
   linkedin: "https://www.linkedin.com/in/dudekulamahammadhussain",
-  location: "Lucknow, Uttar Pradesh, India"
+  location: "Bengaluru, India",
+  resumeLink: "https://drive.google.com/file/d/1hXS6WcPS9CsegXGCfpxpzQnRCpDP-dR9/view?usp=sharing"
 };
 
 export const STATS = [
   { label: "Problems Solved", value: 500, suffix: "+" },
-  { label: "Projects Built", value: 2, suffix: "+" },
+  { label: "Projects Built", value: 7, suffix: "+" },
   { label: "Internships", value: 2, suffix: "" },
   { label: "CGPA", value: 8.35, suffix: "" },
   { label: "Experience", value: 6, suffix: "+ Months" }
@@ -92,7 +93,8 @@ export const EXPERIENCE: ExperienceItem[] = [
       "Built the complete ML pipeline with feature engineering, imbalance handling, threshold tuning, and evaluation optimization, and deployed it into the customer-care agent interface to flag high-risk cases in real time.",
       "Performed logistic regression for week-over-week analysis and implemented causal modeling to uncover a 350+ bps controllable improvement opportunity."
     ],
-    skills: ["Python", "SQL", "XGBoost", "Logistic Regression", "Causal Modeling", "Machine Learning", "GenAI", "LLMs"]
+    skills: ["Python", "SQL", "XGBoost", "Logistic Regression", "Causal Modeling", "Machine Learning", "GenAI", "LLMs"],
+    certificateLink: "https://drive.google.com/file/d/1GtrtBYnXmZx7WB-v2Mwkgh2WCjJRG9lb/view"
   }
 ];
 
@@ -117,14 +119,14 @@ export const PROJECTS: ProjectItem[] = [
     lessons: "Learned how to build dependable multi-role workflows and ship a production-ready platform with clear data modeling and authentication patterns."
   },
   {
-    id: "feedback-portal",
+    id: "student-feedback",
     title: "Student Feedback Portal",
     shortDesc: "A secure portal for collecting and analyzing student feedback with role-based access and privacy-focused workflows.",
     longDesc: "Developed a web platform that replaces manual feedback collection with a secure digital workflow. The system supports Student, Teacher, and Admin roles and provides clear, privacy-safe handling of feedback data.",
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JavaScript"],
     githubUrl: "https://github.com/Mahammad1500/Student-Feedback-Portal",
-    liveUrl: "#",
-    category: "AI & Analytics",
+    liveUrl: "https://github.com/Mahammad1500/Student-Feedback-Portal",
+    category: "Full Stack",
     features: [
       "Secure authentication for Student, Teacher, and Admin roles.",
       "Digital feedback collection that reduces paperwork and manual processing.",
@@ -185,7 +187,11 @@ export const SKILLS: SkillCategory[] = [
       { name: "Git", level: 90 },
       { name: "GitHub", level: 92 },
       { name: "Linux", level: 84 },
-      { name: "VS Code", level: 95 }
+      { name: "VS Code", level: 95 },
+      { name: "GitHub Copilot", level: 90 },
+      { name: "Cursor", level: 88 },
+      { name: "Windsurf", level: 84 },
+      { name: "Claude Code", level: 82 }
     ]
   }
 ];
@@ -195,31 +201,36 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     title: "The Polaris Fellowship 2026",
     issuer: "Polaris School of Technology",
     description: "Reached the top 1% of 10,000+ applicants across India after clearing four rigorous evaluation rounds for the Software Development Fellowship.",
-    date: "2026"
+    date: "2026",
+    link: "https://drive.google.com/file/d/1RhXAlsYvvHVM0Lj8QMSUk8scJQ-yKzhG/view?usp=sharing"
   },
   {
     title: "Amazon ML Summer School 2024",
     issuer: "Amazon India",
     description: "Selected as a mentee and explored supervised learning, deep neural networks, reinforcement learning, and generative AI with mentorship from Amazon scientists.",
-    date: "2024"
+    date: "2024",
+    link: "https://drive.google.com/file/d/106ORHQg0p-AbN7-MdRnFrV7N2D4PdbOH/view?usp=sharing"
   },
   {
     title: "Microsoft Campus Connect Program 2024",
     issuer: "Microsoft India",
     description: "Selected among the top 100 quiz winners nationally and recognized for strong technical engagement.",
-    date: "2024"
+    date: "2024",
+    link: "https://www.linkedin.com/posts/dudekulamahammadhussain_microsoftcampusconnect-top100quizwinners-activity-7207246724766007296-xoxN"
   },
   {
     title: "Hacktoberfest 2023",
     issuer: "DigitalOcean / Open Source",
     description: "Completed a month-long open-source contribution challenge and merged 4 pull requests.",
-    date: "2023"
+    date: "2023",
+    link: "https://www.holopin.io/hacktoberfest2023/userbadge/clntbi2x330620fmsguw76ucj"
   },
   {
     title: "LeetCode 500+ Problems",
     issuer: "LeetCode",
     description: "Built consistent problem-solving strength across data structures, algorithms, and competitive programming challenges.",
-    date: "Ongoing"
+    date: "Ongoing",
+    link: "https://leetcode.com/u/Mahammad1500/"
   }
 ];
 

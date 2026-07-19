@@ -222,7 +222,7 @@ export default function Projects() {
                       className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-600 font-bold text-xs uppercase tracking-wider text-white transition-all"
                     >
                       <FaGithub className="w-4 h-4" />
-                      <span>Codebase</span>
+                      <span>GitHub</span>
                     </a>
                     <a
                       href={selectedProject.liveUrl}
