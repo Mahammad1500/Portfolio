@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export default function CustomCursor() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const [hovered, setHovered] = useState(false);
   const [hidden, setHidden] = useState(false);
 
@@ -16,8 +20,6 @@ export default function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    setMounted(true);
-
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -47,8 +49,6 @@ export default function CustomCursor() {
       window.addEventListener("mouseover", handleMouseOver);
       document.addEventListener("mouseleave", handleMouseLeave);
       document.addEventListener("mouseenter", handleMouseEnter);
-    } else {
-      setHidden(true);
     }
 
     return () => {

@@ -1,31 +1,39 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal, Trophy, Cpu, Code, Flame } from "lucide-react";
+import { Trophy, Cpu, Code, Flame, ExternalLink } from "lucide-react";
 import { ACHIEVEMENTS } from "@/lib/data";
 
 const ACHIEVEMENT_ICONS: Record<string, React.ReactNode> = {
-  "The Polaris Fellowship 2026": <Trophy className="w-6 h-6 text-cyan-400" />,
-  "Amazon ML Summer School 2024": <Cpu className="w-6 h-6 text-amber-500" />,
-  "Microsoft Campus Connect Program 2024": <Trophy className="w-6 h-6 text-blue-500" />,
-  "Hacktoberfest 2023": <Flame className="w-6 h-6 text-red-500" />,
-  "LeetCode 500+ Problems": <Code className="w-6 h-6 text-cyan-400" />,
+  "The Polaris Fellowship 2026": <Trophy className="w-6 h-6 text-amber-400" />,
+  "Amazon ML Summer School 2024": <Cpu className="w-6 h-6 text-sky-400" />,
+  "Microsoft Campus Connect Program 2024": <Trophy className="w-6 h-6 text-indigo-400" />,
+  "Hacktoberfest 2023": <Flame className="w-6 h-6 text-rose-400" />,
+  "LeetCode 500+ Problems": <Code className="w-6 h-6 text-emerald-400" />,
 };
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="py-24 px-6 md:px-12 max-w-7xl mx-auto scroll-mt-12">
+    <section id="achievements" className="py-24 px-6 md:px-12 max-w-7xl mx-auto scroll-mt-16">
+      {/* Anime Section Header */}
       <div className="flex items-center gap-3 mb-4">
-        <Terminal className="w-5 h-5 text-cyan-400" />
-        <span className="text-xs uppercase tracking-widest text-cyan-400 font-bold">
-          05. Achievements
+        <div className="w-7 h-7 rounded-full bg-amber-500/10 border border-amber-400/40 flex items-center justify-center">
+          <Trophy className="w-3.5 h-3.5 text-amber-400" />
+        </div>
+        <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold">
+          名誉の証 • 05. Milestones & Recognition
         </span>
       </div>
 
-      <h2 className="text-3xl md:text-5xl font-black font-title tracking-tight mb-16">
-        Milestones & <span className="text-cyan-400 font-extrabold">Recognition</span>
+      <h2 className="text-3xl md:text-5xl font-black font-title tracking-tight text-white mb-6">
+        Secret Gadget <span className="text-amber-400">Honors</span> & Badges
       </h2>
 
+      <p className="text-slate-400 text-base md:text-lg max-w-2xl mb-16 leading-relaxed">
+        Key competitive recognitions, national fellowships, and rigorous problem-solving milestones achieved throughout my engineering journey.
+      </p>
+
+      {/* Grid: Milestone Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {ACHIEVEMENTS.map((ach, idx) => (
           <motion.div
@@ -34,39 +42,44 @@ export default function Achievements() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: idx * 0.08 }}
-            className="p-6 md:p-8 rounded-2xl glass-panel relative overflow-hidden group border border-slate-800/85 hover:border-cyan-500/25 transition-all duration-300 flex gap-4 md:gap-6 items-start"
+            className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border-2 border-sky-500/30 hover:border-amber-400/60 relative overflow-hidden group shadow-xl transition-all duration-300 flex flex-col sm:flex-row gap-5 items-start"
           >
-            {/* Ambient card background glow */}
-            <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-cyan-500/5 to-transparent blur-xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
-            
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-900 group-hover:border-cyan-500/20 group-hover:bg-cyan-500/5 transition-all shrink-0">
-              {ACHIEVEMENT_ICONS[ach.title] || <Trophy className="w-6 h-6" />}
+            {/* Ambient Corner Glow */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/10 via-sky-500/5 to-transparent blur-xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+
+            {/* Icon Disc */}
+            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 group-hover:border-amber-400/50 group-hover:bg-amber-400/5 transition-all shrink-0">
+              {ACHIEVEMENT_ICONS[ach.title] || <Trophy className="w-6 h-6 text-amber-400" />}
             </div>
 
-            <div>
-              <div className="flex items-center gap-3 mb-2 flex-wrap">
-                <h3 className="text-lg md:text-xl font-bold font-title text-white group-hover:text-cyan-400 transition-colors">
-                  {ach.title}
-                </h3>
-                <span className="px-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-[10px] font-semibold text-slate-500 uppercase tracking-widest">
+            {/* Body */}
+            <div className="flex-grow">
+              <div className="flex items-center justify-between flex-wrap gap-2 mb-1.5">
+                <span className="text-xs uppercase tracking-widest text-sky-400 font-bold">
+                  {ach.issuer}
+                </span>
+                <span className="px-2.5 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-[10px] font-bold text-amber-300 font-mono">
                   {ach.date}
                 </span>
               </div>
-              <p className="text-xs uppercase tracking-widest text-cyan-400/80 font-bold mb-3">
-                {ach.issuer}
-              </p>
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+
+              <h3 className="text-lg sm:text-xl font-bold font-title text-white mb-2 group-hover:text-amber-300 transition-colors">
+                {ach.title}
+              </h3>
+
+              <p className="text-slate-300 text-sm leading-relaxed mb-4">
                 {ach.description}
               </p>
+
               {ach.link && (
                 <a
                   href={ach.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-3 text-xs font-semibold uppercase tracking-widest text-cyan-400 hover:text-cyan-300 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-400 hover:text-amber-300 transition-colors group-hover:translate-x-1 transition-transform"
                 >
-                  <span>View Link</span>
-                  <span aria-hidden>↗</span>
+                  <span>Verify Credential</span>
+                  <ExternalLink className="w-3 h-3" />
                 </a>
               )}
             </div>

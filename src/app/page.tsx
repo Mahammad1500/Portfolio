@@ -1,4 +1,4 @@
-import AnimatedBackground from "@/components/AnimatedBackground";
+import AnimeSkyEnvironment from "@/components/AnimeSkyEnvironment";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -14,10 +14,10 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      {/* Floating Blobs & Mesh Grid */}
-      <AnimatedBackground />
+      {/* 22nd-Century Anime Sky & Floating Gadgets Environment */}
+      <AnimeSkyEnvironment />
 
-      {/* Sticky Glass Navbar */}
+      {/* Sticky Golden Bell Navigation */}
       <Navbar />
 
       {/* Main Landing Sections */}

@@ -15,20 +15,31 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Mahammad Hussain | SDE & Machine Learning Engineer Portfolio",
-  description: "Explore the premium SDE, ML, and AI engineer portfolio of Mahammad Hussain. Featuring experience at Flipkart, competitive programming metrics, and advanced web applications.",
-  keywords: ["Mahammad Hussain", "SDE", "Machine Learning", "AI Engineer", "Software Engineer Portfolio", "IIIT Lucknow", "Flipkart Intern"],
+  title: "Mahammad Hussain | SDE & Machine Learning Engineer • 22nd-Century 3D Portfolio",
+  description: "Interactive Doraemon-themed 3D engineering portfolio of Mahammad Hussain. SDE Intern at CoinDCX (Backend), ex-Flipkart ML Intern, IIIT Lucknow CS graduate building resilient distributed systems and predictive models.",
+  keywords: [
+    "Mahammad Hussain",
+    "Software Development Engineer",
+    "CoinDCX Intern",
+    "Flipkart Intern",
+    "Machine Learning Engineer",
+    "IIIT Lucknow",
+    "Go Backend",
+    "Python XGBoost",
+    "3D Portfolio",
+    "Doraemon Portfolio"
+  ],
   authors: [{ name: "Mahammad Hussain" }],
   openGraph: {
     title: "Mahammad Hussain | SDE & Machine Learning Engineer",
-    description: "Premium engineering portfolio detailing scalable system designs, machine learning inference microservices, and interactive web tools.",
+    description: "Explore the 22nd-century interactive 3D portfolio featuring scalable systems, machine learning models, and production web applications.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Mahammad Hussain | SDE & Machine Learning Engineer Portfolio",
-    description: "Personal engineering portfolio of Mahammad Hussain.",
+    description: "22nd-Century 3D Engineering Portfolio of Mahammad Hussain.",
   },
 };
 
@@ -42,7 +53,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-[#020617] text-white selection:bg-cyan-500/30 selection:text-cyan-200">
+      <body className="min-h-full flex flex-col bg-[#070f2b] text-white selection:bg-sky-500/30 selection:text-sky-200">
         {children}
       </body>
     </html>
