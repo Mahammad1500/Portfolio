@@ -15,31 +15,30 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Mahammad Hussain | SDE & Machine Learning Engineer • 22nd-Century 3D Portfolio",
-  description: "Interactive Doraemon-themed 3D engineering portfolio of Mahammad Hussain. SDE Intern at CoinDCX (Backend), ex-Flipkart ML Intern, IIIT Lucknow CS graduate building resilient distributed systems and predictive models.",
+  title: "Mahammad Hussain | Software Development Engineer (SDE) • 3D Doraemon Portfolio",
+  description: "Doraemon-themed 3D engineering portfolio of Mahammad Hussain, Software Development Engineer. SDE Intern at CoinDCX (Backend), IIIT Lucknow CS graduate building scalable backend distributed systems.",
   keywords: [
     "Mahammad Hussain",
     "Software Development Engineer",
-    "CoinDCX Intern",
-    "Flipkart Intern",
-    "Machine Learning Engineer",
+    "SDE",
+    "Backend SDE",
+    "CoinDCX SDE",
+    "Flipkart SDE",
     "IIIT Lucknow",
     "Go Backend",
-    "Python XGBoost",
-    "3D Portfolio",
-    "Doraemon Portfolio"
+    "3D Doraemon Portfolio"
   ],
   authors: [{ name: "Mahammad Hussain" }],
   openGraph: {
-    title: "Mahammad Hussain | SDE & Machine Learning Engineer",
-    description: "Explore the 22nd-century interactive 3D portfolio featuring scalable systems, machine learning models, and production web applications.",
+    title: "Mahammad Hussain | Software Development Engineer (SDE)",
+    description: "Explore the Doraemon-themed 3D engineering portfolio featuring scalable systems and full-stack software applications.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mahammad Hussain | SDE & Machine Learning Engineer Portfolio",
-    description: "22nd-Century 3D Engineering Portfolio of Mahammad Hussain.",
+    title: "Mahammad Hussain | Software Development Engineer Portfolio",
+    description: "3D Doraemon-Themed Engineering Portfolio of Mahammad Hussain.",
   },
 };
 
@@ -51,9 +50,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
+      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#070f2b] text-white selection:bg-sky-500/30 selection:text-sky-200">
+      <body className="min-h-full flex flex-col bg-[#f0f9ff] text-slate-900 selection:bg-sky-400/30 selection:text-sky-900">
         {children}
       </body>
     </html>

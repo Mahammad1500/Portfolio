@@ -1,52 +1,69 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #0284c7;
-  --color-secondary: #070f2b;
+  --color-primary: #0ea5e9;
+  --color-secondary: #e0f2fe;
   --color-accent: #38bdf8;
-  --color-bell: #fbbf24;
+  --color-bell: #f59e0b;
   --color-collar: #ef4444;
-  --color-door: #f43f5e;
-  --color-background-dark: #070f2b;
+  --color-door: #ec4899;
+  --color-background-light: #e0f7ff;
 
   --font-sans: var(--font-inter), var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
   --font-title: var(--font-space-grotesk), var(--font-inter), sans-serif;
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float-slow 12s ease-in-out infinite;
-  --animate-pulse-slow: pulse-slow 8s ease-in-out infinite;
   --animate-spin-slow: spin-slow 20s linear infinite;
+  --animate-sway: sway 4s ease-in-out infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-12px) rotate(2deg); }
+    50% { transform: translateY(-14px) rotate(2deg); }
   }
   @keyframes float-slow {
     0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) translateX(10px) rotate(-3deg); }
-  }
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.1); }
+    50% { transform: translateY(-18px) translateX(10px) rotate(-2deg); }
   }
   @keyframes spin-slow {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-5deg) translateY(0px); }
+    50% { transform: rotate(5deg) translateY(-8px); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
 }
 
 :root {
-  --background: #070f2b;
-  --foreground: #ffffff;
-  --bg: #070f2b;
-  --bg-soft: #0b192f;
-  --surface: rgba(11, 25, 47, 0.75);
-  --border: rgba(56, 189, 248, 0.2);
-  --accent: #38bdf8;
+  /* Doraemon light sky blue palette */
+  --background: #daf3fc;
+  --foreground: #0c2a42;
+  --bg: #daf3fc;
+  --bg-soft: #c8eaf9;
+  --bg-mid: #b5e0f6;
+  --surface: #ffffff;
+  --surface-soft: #f0faff;
+  --border: rgba(14, 165, 233, 0.22);
+  --accent: #0ea5e9;
+  --doraemon-blue: #31a6dc;
+  --doraemon-white: #fafcff;
 }
 
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html {
   scroll-behavior: smooth;
 }
 
@@ -55,29 +72,97 @@ body {
   color: var(--foreground);
   overflow-x: hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  /* Doraemon sky gradient - light and cheerful */
+  background: linear-gradient(
+    170deg,
+    #c2e9fb 0%,
+    #daf3fc 15%,
+    #e8f7fe 35%,
+    #d4eefb 55%,
+    #c8e9f9 75%,
+    #b8dff5 100%
+  );
   background-attachment: fixed;
+  min-height: 100vh;
 }
 
-/* Custom Scrollbar */
+/* Custom Doraemon Scrollbar */
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #070f2b;
+  background: #c2e9fb;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0284c7;
+  background: linear-gradient(180deg, #0ea5e9, #31a6dc);
   border-radius: 9999px;
-  border: 2px solid #070f2b;
+  border: 2px solid #c2e9fb;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: linear-gradient(180deg, #0284c7, #0ea5e9);
 }
 
-/* Anime Blueprint Grid Background */
+/* Doraemon Cloud Grid subtle */
 .grid-bg {
-  background-size: 32px 32px;
+  background-size: 40px 40px;
   background-image:
-    linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(14, 165, 233, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 165, 233, 0.06) 1px, transparent 1px);
+}
+
+/* Section card glass style for light theme */
+.doraemon-card {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1.5px solid rgba(14, 165, 233, 0.2);
+  box-shadow: 0 4px 24px rgba(14, 165, 233, 0.08), 0 1px 4px rgba(0,0,0,0.04);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+}
+
+/* Floating gadgets */
+.float-gadget {
+  animation: float 6s ease-in-out infinite;
+  will-change: transform;
+}
+.float-gadget-2 {
+  animation: float-slow 9s ease-in-out infinite;
+  will-change: transform;
+}
+.float-gadget-3 {
+  animation: float 7.5s ease-in-out infinite 1s;
+  will-change: transform;
+}
+
+/* Shimmer text */
+.shimmer-text {
+  background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 25%, #0284c7 50%, #38bdf8 75%, #0ea5e9 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* 3D perspective container */
+.perspective-container {
+  perspective: 1000px;
+}
+
+/* Doraemon badge pill */
+.doraemon-pill {
+  background: rgba(255,255,255,0.9);
+  border: 1.5px solid rgba(14, 165, 233, 0.3);
+  color: #0369a1;
+  border-radius: 9999px;
+  padding: 0.25rem 0.875rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.12);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(14, 165, 233, 0.25);
+  color: #0c2a42;
 }
