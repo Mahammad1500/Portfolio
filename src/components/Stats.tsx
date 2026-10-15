@@ -13,30 +13,24 @@ interface StatCounterProps {
 function StatCounter({ value, suffix, label }: StatCounterProps) {
   const [count, setCount] = useState(0);
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-60px" });
 
   useEffect(() => {
     if (!isInView) return;
 
-    let start = 0;
-    // Calculate speed based on the size of the number
-    const duration = 1500; // 1.5s animation duration
+    const duration = 1400;
     const end = value;
     const isFloat = !Number.isInteger(end);
-    
-    // For smaller integers like 1, we want fewer steps, for larger like 400 we want more
     const startTime = performance.now();
 
     const animate = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function (easeOutQuad)
       const easeProgress = progress * (2 - progress);
-      const currentVal = start + easeProgress * (end - start);
+      const currentVal = easeProgress * end;
 
       if (isFloat) {
-        setCount(parseFloat(currentVal.toFixed(1)));
+        setCount(parseFloat(currentVal.toFixed(2)));
       } else {
         setCount(Math.floor(currentVal));
       }
@@ -50,14 +44,15 @@ function StatCounter({ value, suffix, label }: StatCounterProps) {
   }, [isInView, value]);
 
   return (
-    <div ref={containerRef} className="flex flex-col items-center justify-center p-6 text-center">
-      <h3 className="text-4xl md:text-6xl font-black font-title text-white tracking-tight mb-2 flex items-center justify-center">
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-extrabold">
+    <div ref={containerRef} className="flex flex-col items-center justify-center p-5 text-center">
+      <h3 className="text-3xl sm:text-5xl font-black font-title tracking-tight mb-1 flex items-center justify-center">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-amber-300 font-extrabold">
           {count}
         </span>
-        <span className="text-cyan-400 font-medium ml-0.5">{suffix}</span>
+        <span className="text-amber-400 font-bold ml-0.5 text-2xl sm:text-3xl">{suffix}</span>
       </h3>
-      <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider">
+
+      <p className="text-slate-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">
         {label}
       </p>
     </div>
@@ -66,24 +61,16 @@ function StatCounter({ value, suffix, label }: StatCounterProps) {
 
 export default function Stats() {
   return (
-    <section className="relative py-16 px-6 md:px-12 bg-slate-950/40 border-y border-slate-900 overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full flex justify-between pointer-events-none opacity-20">
-        <div className="w-[1px] h-full bg-gradient-to-b from-slate-800 to-transparent" />
-        <div className="w-[1px] h-full bg-gradient-to-b from-slate-800 to-transparent" />
-        <div className="w-[1px] h-full bg-gradient-to-b from-slate-800 to-transparent" />
-        <div className="w-[1px] h-full bg-gradient-to-b from-slate-800 to-transparent" />
-      </div>
-
+    <section className="relative py-12 px-6 md:px-12 bg-slate-900/40 border-y border-slate-800/80">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center divide-y md:divide-y-0 md:divide-x divide-slate-900">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-center divide-y md:divide-y-0 md:divide-x divide-slate-800">
           {STATS.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
+              transition={{ duration: 0.4, delay: index * 0.06 }}
               className={index === 4 && STATS.length % 2 !== 0 ? "col-span-2 md:col-span-1" : ""}
             >
               <StatCounter

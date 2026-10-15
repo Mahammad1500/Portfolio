@@ -1,93 +1,183 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Brain, Cpu, Database, Terminal } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Database, Brain, Cpu, CheckCircle2, ChevronRight, Sparkles } from "lucide-react";
+import { sounds } from "@/lib/sound";
 
 export default function About() {
-  const pillars = [
+  const [activeTab, setActiveTab] = useState(0);
+
+  const pocketGadgets = [
     {
-      icon: <Brain className="w-6 h-6 text-cyan-400" />,
-      title: "Machine Learning & AI",
-      desc: "Deep interest in model training, feature engineering, and causal inference. Experienced in processing large-scale datasets and optimizing algorithms for predictive accuracy.",
+      id: "backend",
+      icon: <Database className="w-5 h-5 text-sky-600" />,
+      title: "Backend & Distributed Systems",
+      badge: "CoinDCX FRP Engineering (Go • TypeScript)",
+      desc: "Working with the Finance, Risk & Portfolio (FRP) engineering team at CoinDCX to build high-scale backend platform services in Go and TypeScript. Architecting resilient REST APIs and platform business logic for core crypto workflows where scalability, fault tolerance, and deterministic performance are paramount.",
+      points: [
+        "Concurrent, low-latency microservices engineered in Go and TypeScript.",
+        "Deterministic financial and crypto transaction platform logic.",
+        "Production-grade API contracts, error boundaries, and high reliability.",
+      ],
     },
     {
-      icon: <Database className="w-6 h-6 text-blue-500" />,
-      title: "Scalable Systems",
-      desc: "Passionate about backend architectures, database indexing, and real-time streams. Designing clean API gateways and microservices that scale under demand.",
+      id: "ml",
+      icon: <Brain className="w-5 h-5 text-amber-600" />,
+      title: "Machine Learning & Predictive Systems",
+      badge: "Flipkart SDE Intern '26 (Python • XGBoost)",
+      desc: "Engineered two end-to-end production XGBoost ML models at Flipkart to forecast customer social media escalations before and after customer care agent intervention, enabling proactive support action.",
+      points: [
+        "Trained models across 2.8Cr+ conversation rows with custom threshold tuning.",
+        "Implemented causal modeling revealing 350+ bps controllable improvement opportunity.",
+        "End-to-end pipeline: feature engineering, imbalance handling, and real-time inference.",
+      ],
     },
     {
-      icon: <Cpu className="w-6 h-6 text-purple-400" />,
-      title: "Full Stack Development",
-      desc: "Delivering modern user experiences using React/Next.js paired with robust servers. Believer in type-safety, modular design, and responsive layout structures.",
+      id: "fullstack",
+      icon: <Cpu className="w-5 h-5 text-purple-600" />,
+      title: "Full-Stack System Engineering",
+      badge: "Production Web Applications & Platforms",
+      desc: "Bridging dependable system backends with intuitive, accessible, and responsive user interfaces. Passionate about modular software design, type safety, and crafting digital tools that eliminate real-world workflow bottlenecks.",
+      points: [
+        "Architected Intervuex cutting manual panel scheduling coordination by 60%.",
+        "Built privacy-focused student feedback platform reducing manual paperwork by 80%.",
+        "Commitment to clean code, fast load times, and reliable data modeling.",
+      ],
     },
   ];
 
-  return (
-    <section id="about" className="py-24 px-6 md:px-12 max-w-7xl mx-auto scroll-mt-12">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-        {/* Left Column: Narrative */}
-        <div className="lg:col-span-6 flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <Terminal className="w-5 h-5 text-cyan-400" />
-              <span className="text-xs uppercase tracking-widest text-cyan-400 font-bold">
-                01. About Me
-              </span>
-            </div>
-            
-            <h2 className="text-3xl md:text-5xl font-black font-title tracking-tight mb-8">
-              Building the <span className="text-cyan-400 font-extrabold">backend</span> and <span className="text-blue-500 font-extrabold">intelligence</span> behind great products.
-            </h2>
+  const handleTabChange = (index: number) => {
+    sounds.playGadgetPop();
+    setActiveTab(index);
+  };
 
-            <div className="space-y-6 text-slate-300 text-base md:text-lg leading-relaxed">
-              <p>
-                I am a <strong className="text-white">Computer Science graduate from IIIT Lucknow</strong> with a strong interest in backend engineering, machine learning, and building dependable software products. My work sits at the intersection of systems thinking, data-driven decisions, and product-focused development.
-              </p>
-              <p>
-                I am currently interning as a <strong className="text-white">Software Development Engineer Intern at CoinDCX</strong>, where I work on backend services in Go and TypeScript for financial and crypto workflows. Earlier, I contributed to machine learning initiatives at Flipkart, developing models for escalation prediction and causal insight generation.
-              </p>
-              <p>
-                I enjoy solving ambiguous problems, writing production-ready code, and connecting technical depth with user impact. Whether it is building scalable APIs, training models on large datasets, or shipping polished web experiences, I aim to create software that is thoughtful, reliable, and useful.
+  return (
+    <section id="about" className="py-24 px-6 md:px-12 max-w-7xl mx-auto scroll-mt-16">
+      {/* Section Header */}
+      <div className="mb-12">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-300 text-sky-800 text-xs font-semibold mb-3 shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+          <span>4D Pocket Laboratory • About Me</span>
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-black font-title text-slate-900 tracking-tight">
+          Engineering Depth & <span className="text-sky-600">Core Pillars</span>
+        </h2>
+        <p className="text-slate-600 text-base sm:text-lg max-w-2xl mt-3 leading-relaxed">
+          Combining computer science foundations, distributed backend engineering, and full-stack software development to build dependable products.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        {/* Left Column: 4D Pocket Selector Tabs */}
+        <div className="lg:col-span-5 flex flex-col gap-4">
+          <div className="p-3 rounded-2xl bg-white border border-sky-200 shadow-md space-y-2">
+            {pocketGadgets.map((gadget, idx) => (
+              <button
+                key={gadget.id}
+                onClick={() => handleTabChange(idx)}
+                className={`w-full text-left p-4 rounded-xl transition-all duration-200 flex items-center justify-between group cursor-pointer border ${
+                  activeTab === idx
+                    ? "bg-sky-50 border-sky-400 text-slate-900 shadow-sm"
+                    : "bg-slate-50/50 border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                }`}
+              >
+                <div className="flex items-center gap-3.5">
+                  <div
+                    className={`p-2.5 rounded-xl border ${
+                      activeTab === idx
+                        ? "bg-white border-sky-300 text-sky-600 shadow-sm"
+                        : "bg-white border-slate-200 text-slate-500 group-hover:text-slate-800"
+                    }`}
+                  >
+                    {gadget.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm sm:text-base text-slate-900">
+                      {gadget.title}
+                    </h3>
+                    <p className="text-xs text-sky-600 font-medium">
+                      {idx === 0 ? "CoinDCX FRP" : idx === 1 ? "Flipkart ML" : "Web Architecture"}
+                    </p>
+                  </div>
+                </div>
+
+                <ChevronRight
+                  className={`w-4 h-4 transition-transform ${
+                    activeTab === idx ? "translate-x-1 text-sky-600" : "text-slate-400"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+
+          {/* 3D Memory Bread Feature Card */}
+          <div className="p-5 rounded-2xl bg-white border border-amber-300 shadow-md flex items-center gap-4">
+            <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-amber-200 shadow-sm">
+              <Image
+                src="/images/memory_bread.jpg"
+                alt="3D Memory Bread Anki-pan"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-600 block mb-0.5">
+                Secret Gadget: Memory Bread
+              </span>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Absorbing algorithms, distributed consensus, and system architectures with permanent retention.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Right Column: Pillars / Cards */}
-        <div className="lg:col-span-6 flex flex-col gap-6">
-          {pillars.map((pillar, index) => (
+        {/* Right Column: Active Pocket Compartment Detail */}
+        <div className="lg:col-span-7">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={pillar.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="p-6 rounded-2xl glass-panel relative overflow-hidden group border border-slate-800/80 hover:border-cyan-500/30 transition-all duration-300"
+              key={activeTab}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              className="p-8 sm:p-10 rounded-3xl bg-white border border-sky-200 shadow-lg relative overflow-hidden"
             >
-              {/* Card light reflection */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-cyan-500/5 to-transparent blur-xl pointer-events-none group-hover:scale-150 transition-transform duration-500" />
-              
-              <div className="flex gap-4 items-start">
-                <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 group-hover:border-cyan-500/20 group-hover:bg-cyan-500/5 transition-all">
-                  {pillar.icon}
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold font-title text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-slate-400 text-sm md:text-base leading-relaxed">
-                    {pillar.desc}
-                  </p>
-                </div>
+              {/* Top Badge */}
+              <div className="mb-4">
+                <span className="px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold uppercase tracking-wider">
+                  {pocketGadgets[activeTab].badge}
+                </span>
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl font-extrabold font-title text-slate-900 mb-4">
+                {pocketGadgets[activeTab].title}
+              </h3>
+
+              <p className="text-slate-700 text-base leading-relaxed mb-8">
+                {pocketGadgets[activeTab].desc}
+              </p>
+
+              {/* Point Checklist */}
+              <div className="space-y-3 mb-8">
+                <h4 className="text-xs uppercase tracking-wider font-bold text-sky-700">
+                  Key Technical Achievements:
+                </h4>
+                {pocketGadgets[activeTab].points.map((pt, i) => (
+                  <div key={i} className="flex items-start gap-3 text-slate-700 text-sm sm:text-base">
+                    <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-1" />
+                    <span>{pt}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom Quote / Philosophy */}
+              <div className="p-4 rounded-xl bg-sky-50/60 border border-sky-100 text-xs text-slate-600">
+                <strong className="text-slate-900">Engineering Principle:</strong> High reliability comes from rigorous edge-case testing, clear API boundaries, and intentional data modeling.
               </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import AnimatedBackground from "@/components/AnimatedBackground";
+import AnimeSkyEnvironment from "@/components/AnimeSkyEnvironment";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,17 +10,21 @@ import Achievements from "@/components/Achievements";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import DoraemonAudio from "@/components/DoraemonAudio";
 
 export default function Home() {
   return (
     <>
-      {/* Floating Blobs & Mesh Grid */}
-      <AnimatedBackground />
+      {/* Doraemon Light Sky Environment with floating gadgets */}
+      <AnimeSkyEnvironment />
 
-      {/* Sticky Glass Navbar */}
+      {/* BGM — auto-plays Doraemon theme on first interaction */}
+      <DoraemonAudio />
+
+      {/* Navigation */}
       <Navbar />
 
-      {/* Main Landing Sections */}
+      {/* Main Portfolio Sections */}
       <main className="flex-1 flex flex-col relative">
         <Hero />
         <About />
@@ -33,7 +37,7 @@ export default function Home() {
         <Contact />
       </main>
 
-      {/* Footer Details */}
+      {/* Footer */}
       <Footer />
     </>
   );

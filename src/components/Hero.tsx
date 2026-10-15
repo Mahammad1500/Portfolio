@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, ArrowDown, FileText, Briefcase } from "lucide-react";
+import { FileText, Briefcase, ExternalLink, MapPin, ArrowRight, Sparkles } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { PERSONAL_INFO } from "@/lib/data";
-import confetti from "canvas-confetti";
+import { sounds } from "@/lib/sound";
+import Doraemon3D from "./Doraemon3D";
 
 export default function Hero() {
   const [typedRole, setTypedRole] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Custom typing animation hook logic
   useEffect(() => {
     const currentFullRole = PERSONAL_INFO.roles[roleIndex];
     let timer: NodeJS.Timeout;
@@ -21,10 +21,9 @@ export default function Hero() {
       if (!isDeleting) {
         setTypedRole(currentFullRole.substring(0, typedRole.length + 1));
         if (typedRole === currentFullRole) {
-          // Pause at end
-          timer = setTimeout(() => setIsDeleting(true), 2000);
+          timer = setTimeout(() => setIsDeleting(true), 2400);
         } else {
-          timer = setTimeout(handleTyping, 100);
+          timer = setTimeout(handleTyping, 75);
         }
       } else {
         setTypedRole(currentFullRole.substring(0, typedRole.length - 1));
@@ -32,31 +31,22 @@ export default function Hero() {
           setIsDeleting(false);
           setRoleIndex((prev) => (prev + 1) % PERSONAL_INFO.roles.length);
         } else {
-          timer = setTimeout(handleTyping, 50);
+          timer = setTimeout(handleTyping, 35);
         }
       }
     };
 
-    timer = setTimeout(handleTyping, isDeleting ? 50 : 150);
-
+    timer = setTimeout(handleTyping, isDeleting ? 35 : 110);
     return () => clearTimeout(timer);
   }, [typedRole, isDeleting, roleIndex]);
 
-  const handleResumeDownload = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ["#2563EB", "#06B6D4", "#ffffff"],
-    });
-
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleResumeClick = () => {
+    sounds.playChime();
+    window.open(PERSONAL_INFO.resumeLink, "_blank");
   };
 
   const handleScrollTo = (id: string) => {
+    sounds.playChime();
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -66,138 +56,142 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden px-6 md:px-12"
+      className="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 md:px-12 overflow-hidden"
     >
-      <div className="max-w-5xl mx-auto text-center z-10 flex flex-col items-center">
-        {/* Intro Tag */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel-light text-cyan-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-6 hidden"
-        >
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span>Status</span>
-        </motion.div>
-
-        {/* Hello Greeting */}
-        <motion.h3
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-slate-400 text-base md:text-lg font-medium mb-3 tracking-wide"
-        >
-          I&apos;m a software engineer who builds backends, trains ML models, and ships full-stack products.
-        </motion.h3>
-
-        {/* Name Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-8xl font-black font-title tracking-tight text-gradient mb-4 selection:bg-cyan-500/20"
-        >
-          {PERSONAL_INFO.name}
-        </motion.h1>
-
-        {/* Typing Roles Container */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="h-10 md:h-14 mb-8 flex items-center justify-center"
-        >
-          <span className="text-xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 font-title tracking-wide">
-            {typedRole}
-          </span>
-          <span className="w-1 h-6 md:h-10 bg-cyan-400 ml-1 animate-pulse" />
-        </motion.div>
-
-        {/* Summary Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-slate-400 text-base md:text-xl max-w-2xl leading-relaxed mb-10"
-        >
-          {PERSONAL_INFO.bio}
-        </motion.p>
-
-        {/* Buttons / CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mb-12"
-        >
-          <button
-            onClick={() => handleScrollTo("projects")}
-            className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-sm tracking-wider uppercase transition-all shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.03] cursor-pointer flex items-center justify-center gap-2"
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        {/* Left Column: Engineer Bio & Call-to-actions */}
+        <div className="lg:col-span-7 flex flex-col items-start">
+          {/* Doraemon Accent Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-sky-300 text-sky-800 text-xs font-bold mb-4 shadow-sm"
           >
-            <Briefcase className="w-4 h-4" />
-            <span>View Projects</span>
-          </button>
-          <button
-            onClick={handleResumeDownload}
-            className="w-full sm:w-auto px-8 py-4 rounded-full glass-panel hover:bg-slate-800/80 text-white font-bold text-sm tracking-wider uppercase transition-all border border-slate-700 hover:border-slate-500 cursor-pointer flex items-center justify-center gap-2"
-          >
-            <FileText className="w-4 h-4 text-cyan-400" />
-            <span>Let&apos;s Connect</span>
-          </button>
-        </motion.div>
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+            <span>Software Development Engineer</span>
+            <span className="text-slate-300">•</span>
+            <span className="text-sky-700">IIIT Lucknow CSE</span>
+          </motion.div>
 
-        {/* Social Icons */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="flex items-center gap-6"
-        >
-          <a
-            href={PERSONAL_INFO.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full glass-panel-light text-slate-400 hover:text-white hover:border-cyan-400/50 hover:shadow-[0_0_10px_rgba(6,182,212,0.2)] transition-all duration-300"
-            aria-label="GitHub"
+          {/* Name Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-black font-title tracking-tight text-slate-900 mb-2"
           >
-            <FaGithub className="w-5 h-5" />
-          </a>
-          <a
-            href={PERSONAL_INFO.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full glass-panel-light text-slate-400 hover:text-white hover:border-cyan-400/50 hover:shadow-[0_0_10px_rgba(6,182,212,0.2)] transition-all duration-300"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedin className="w-5 h-5" />
-          </a>
-          <a
-            href={`mailto:${PERSONAL_INFO.email}`}
-            className="p-3 rounded-full glass-panel-light text-slate-400 hover:text-white hover:border-cyan-400/50 hover:shadow-[0_0_10px_rgba(6,182,212,0.2)] transition-all duration-300"
-            aria-label="Email"
-          >
-            <Mail className="w-5 h-5" />
-          </a>
-          <a
-            href={`tel:${PERSONAL_INFO.phone}`}
-            className="p-3 rounded-full glass-panel-light text-slate-400 hover:text-white hover:border-cyan-400/50 hover:shadow-[0_0_10px_rgba(6,182,212,0.2)] transition-all duration-300"
-            aria-label="Phone"
-          >
-            <Phone className="w-5 h-5" />
-          </a>
-        </motion.div>
-      </div>
+            Hi, I&apos;m{" "}
+            <span className="shimmer-text">
+              {PERSONAL_INFO.name}
+            </span>
+          </motion.h1>
 
-      {/* Mouse Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hidden md:flex">
-        <span className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Scroll Down</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 border-2 border-slate-700 rounded-full flex justify-center pt-1.5"
-        >
-          <div className="w-1 h-2 bg-cyan-400 rounded-full" />
-        </motion.div>
+          {/* Role Ticker (Focused on SDE) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="h-10 sm:h-12 flex items-center mb-4"
+          >
+            <span className="text-xl sm:text-3xl font-extrabold text-amber-500 font-title tracking-wide">
+              {typedRole}
+            </span>
+            <span className="w-1 h-6 sm:h-8 bg-sky-500 ml-1.5 animate-pulse rounded-full" />
+          </motion.div>
+
+          {/* Bio Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl mb-7"
+          >
+            Computer Science graduate from <strong className="text-slate-900 font-bold">IIIT Lucknow</strong> building reliable backend distributed systems, high-throughput microservices in <strong className="text-sky-700 font-bold">Go & TypeScript</strong> at <strong className="text-slate-900 font-bold">CoinDCX</strong>, and production full-stack platforms.
+          </motion.p>
+
+          {/* Key Experience Highlights */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap gap-2.5 mb-8"
+          >
+            <div className="px-3.5 py-1.5 rounded-xl bg-white border border-sky-200 text-slate-800 text-xs font-semibold flex items-center gap-2 shadow-sm">
+              <span className="text-sky-600 font-bold">CoinDCX</span>
+              <span className="text-slate-300">|</span>
+              <span className="text-slate-600">SDE Intern (Backend in Go & TS)</span>
+            </div>
+            <div className="px-3.5 py-1.5 rounded-xl bg-white border border-amber-200 text-slate-800 text-xs font-semibold flex items-center gap-2 shadow-sm">
+              <span className="text-amber-500 font-bold">Flipkart</span>
+              <span className="text-slate-300">|</span>
+              <span className="text-slate-600">SDE Intern (2.8Cr+ Records ML Pipeline)</span>
+            </div>
+          </motion.div>
+
+          {/* Action CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto mb-8"
+          >
+            <button
+              onClick={() => handleScrollTo("projects")}
+              className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-sky-500/20 hover:scale-[1.02] cursor-pointer flex items-center justify-center gap-2"
+            >
+              <Briefcase className="w-4 h-4" />
+              <span>Explore Projects</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+
+            <button
+              onClick={handleResumeClick}
+              className="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-white hover:bg-sky-50 text-slate-800 font-bold text-xs uppercase tracking-wider transition-all border border-slate-300 hover:border-sky-400 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+            >
+              <FileText className="w-4 h-4 text-amber-500" />
+              <span>View Resume</span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+            </button>
+          </motion.div>
+
+          {/* Social Profiles */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex items-center gap-3"
+          >
+            <a
+              href={PERSONAL_INFO.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-white border border-sky-200 text-slate-600 hover:text-sky-600 hover:border-sky-400 transition-all shadow-sm"
+              aria-label="GitHub Profile"
+            >
+              <FaGithub className="w-4 h-4" />
+            </a>
+            <a
+              href={PERSONAL_INFO.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-white border border-sky-200 text-slate-600 hover:text-sky-600 hover:border-sky-400 transition-all shadow-sm"
+              aria-label="LinkedIn Profile"
+            >
+              <FaLinkedin className="w-4 h-4 text-sky-600" />
+            </a>
+            <span className="text-slate-300">•</span>
+            <span className="text-xs text-slate-600 font-medium flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-sky-600" />
+              <span>Bengaluru, India</span>
+            </span>
+          </motion.div>
+        </div>
+
+        {/* Right Column: Real Interactive 3D Doraemon in Three.js */}
+        <div className="lg:col-span-5 flex flex-col items-center justify-center">
+          <Doraemon3D />
+        </div>
       </div>
     </section>
   );
