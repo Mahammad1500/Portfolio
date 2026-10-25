@@ -25,23 +25,21 @@ const floatingItems = [
       </svg>
     ),
   },
-  // Small bell
+  // Air Cannon (Kuukihou)
   {
-    id: "bell",
-    style: { top: "15%", right: "8%", width: 48, height: 48 },
+    id: "aircannon",
+    style: { top: "15%", right: "8%", width: 56, height: 48 },
     delay: 1.2,
-    duration: 5.5,
-    rotate: [-12, 12],
+    duration: 6,
+    rotate: [-8, 8],
     element: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="24" cy="34" rx="18" ry="10" fill="#f59e0b"/>
-        <ellipse cx="24" cy="20" rx="14" ry="18" fill="#fbbf24"/>
-        <circle cx="24" cy="6" r="5" fill="#d97706"/>
-        <ellipse cx="24" cy="38" rx="5" ry="3" fill="#d97706"/>
-        {/* Line across bell */}
-        <ellipse cx="24" cy="28" rx="14" ry="2.5" fill="#92400e" opacity="0.4"/>
-        {/* Glint */}
-        <ellipse cx="17" cy="16" rx="3" ry="4" fill="white" opacity="0.4"/>
+      <svg viewBox="0 0 56 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Air Cannon cylindrical barrel */}
+        <ellipse cx="44" cy="24" rx="8" ry="16" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="2"/>
+        <path d="M12 10 L44 8 L44 40 L12 38 Z" fill="#64748b"/>
+        <ellipse cx="12" cy="24" rx="6" ry="14" fill="#ef4444"/>
+        <ellipse cx="12" cy="24" rx="3.5" ry="8" fill="#7f1d1d"/>
+        <rect x="24" y="6" width="6" height="4" rx="1" fill="#f59e0b"/>
       </svg>
     ),
   },

@@ -23,10 +23,11 @@ const SKILL_SYMBOLS: Record<string, string> = {
   "TypeScript": "📘",
   "SQL": "🔍",
   "React.js": "⚛️",
-  "Next.js": "🌐", // Clean web globe instead of triangle icon
+  "Next.js": "🌐",
   "Redux": "🔄",
   "Node.js": "🟢",
   "Express.js": "🚀",
+  "Ruby on Rails": "💎",
   "Tailwind CSS": "🎨",
   "MongoDB": "🍃",
   "MySQL": "🗄️",

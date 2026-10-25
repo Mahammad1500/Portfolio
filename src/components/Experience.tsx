@@ -29,6 +29,7 @@ export default function Experience() {
             src="/images/time_machine.jpg"
             alt="3D Doraemon Time Machine"
             fill
+            sizes="128px"
             className="object-cover hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent flex items-end p-2">
@@ -50,9 +51,17 @@ export default function Experience() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="relative"
           >
-            {/* Timeline Node Icon */}
-            <span className="absolute -left-[35px] md:-left-[59px] top-1.5 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-2 border-sky-500 shadow-md z-10">
-              <span className="text-xs md:text-sm">{index === 0 ? "⚡" : "🤖"}</span>
+            {/* Timeline Node Icon with Company Logo */}
+            <span className="absolute -left-[35px] md:-left-[59px] top-1.5 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-2 border-sky-400 shadow-md z-10 overflow-hidden p-1">
+              <div className="relative w-full h-full">
+                <Image
+                  src={exp.company === "CoinDCX" ? "/images/coindcx-square.png" : "/images/flipkart-icon.png"}
+                  alt={exp.company}
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                />
+              </div>
             </span>
 
             {/* Experience Card */}
@@ -66,8 +75,31 @@ export default function Experience() {
                   <h3 className="text-xl sm:text-2xl font-bold font-title text-slate-900">
                     {exp.role}
                   </h3>
-                  <div className="flex items-center gap-2 text-sky-600 font-bold mt-1 text-base">
-                    <span>{exp.company}</span>
+                  <div className="flex items-center gap-2.5 text-sky-600 font-bold mt-1 text-base">
+                    {exp.company === "CoinDCX" ? (
+                      <div className="relative h-5 w-20 shrink-0">
+                        <Image
+                          src="/images/coindcx-wordmark.png"
+                          alt="CoinDCX"
+                          fill
+                          sizes="80px"
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-5 h-5 rounded-md overflow-hidden shrink-0 border border-slate-100 bg-white">
+                          <Image
+                            src="/images/flipkart-icon.png"
+                            alt="Flipkart"
+                            fill
+                            sizes="20px"
+                            className="object-contain"
+                          />
+                        </div>
+                        <span>{exp.company}</span>
+                      </div>
+                    )}
                     <span className="text-slate-300">•</span>
                     <span className="text-slate-500 text-xs sm:text-sm font-normal">{exp.location}</span>
                   </div>

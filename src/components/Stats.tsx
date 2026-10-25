@@ -46,13 +46,13 @@ function StatCounter({ value, suffix, label }: StatCounterProps) {
   return (
     <div ref={containerRef} className="flex flex-col items-center justify-center p-5 text-center">
       <h3 className="text-3xl sm:text-5xl font-black font-title tracking-tight mb-1 flex items-center justify-center">
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-amber-300 font-extrabold">
+        <span className="text-sky-600 font-extrabold">
           {count}
         </span>
-        <span className="text-amber-400 font-bold ml-0.5 text-2xl sm:text-3xl">{suffix}</span>
+        <span className="text-amber-500 font-bold ml-0.5 text-2xl sm:text-3xl">{suffix}</span>
       </h3>
 
-      <p className="text-slate-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">
+      <p className="text-slate-600 text-xs sm:text-sm font-bold tracking-wider uppercase">
         {label}
       </p>
     </div>
@@ -61,9 +61,9 @@ function StatCounter({ value, suffix, label }: StatCounterProps) {
 
 export default function Stats() {
   return (
-    <section className="relative py-12 px-6 md:px-12 bg-slate-900/40 border-y border-slate-800/80">
+    <section className="relative py-12 px-6 md:px-12 bg-white/60 backdrop-blur-sm border-y border-sky-200/80 shadow-sm">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-center divide-y md:divide-y-0 md:divide-x divide-slate-800">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-center divide-y md:divide-y-0 md:divide-x divide-sky-200">
           {STATS.map((stat, index) => (
             <motion.div
               key={stat.label}

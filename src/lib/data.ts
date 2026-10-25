@@ -43,15 +43,16 @@ export interface EducationItem {
   duration: string;
   grade: string;
   coursework?: string[];
+  courseStructureLink?: string;
 }
 
 export const PERSONAL_INFO = {
   name: "Mahammad Hussain",
   roles: [
     "Software Development Engineer",
-    "Backend SDE (Go & TypeScript)",
+    "Backend SDE",
     "Full Stack SDE",
-    "Distributed Systems Engineer"
+    "Distributed Systems SDE"
   ],
   bio: "Computer Science graduate from IIIT Lucknow building high-performance backend platforms, distributed systems, and scalable web software.",
   email: "mahammadhussain1500@gmail.com",
@@ -59,15 +60,15 @@ export const PERSONAL_INFO = {
   github: "https://github.com/Mahammad1500",
   linkedin: "https://www.linkedin.com/in/dudekulamahammadhussain",
   location: "Bengaluru, India",
-  portfolio: "https://mahammadhussain.vercel.app",
-  resumeLink: "https://drive.google.com/file/d/1dBY1eiRMH2hjRSNy7f42eG3giatdiuVs/view?usp=sharing"
+  resumeLink: "https://drive.google.com/file/d/1dBY1eiRMH2hjRSNy7f42eG3giatdiuVs/view?usp=sharing",
+  portfolio: "https://mahammadhussain.vercel.app"
 };
 
 export const STATS = [
   { label: "Problems Solved", value: 500, suffix: "+" },
   { label: "Projects Built", value: 7, suffix: "+" },
   { label: "Internships", value: 2, suffix: "" },
-  { label: "CGPA", value: 8.35, suffix: "" },
+  { label: "CGPA", value: 8.20, suffix: "" },
   { label: "Experience", value: 6, suffix: "+ Months" }
 ];
 
@@ -91,9 +92,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     location: "Bengaluru, India",
     achievements: [
       "Developed two end-to-end XGBoost-based ML models to predict customer social media escalations before and after agent intervention, enabling proactive support action.",
-      "Trained the models on highly imbalanced large-scale datasets with 2.8Cr+ conversation-level records and 70K+ escalation cases, plus 60L+ agent-handled records with 65K+ escalation cases.",
-      "Built the full ML pipeline — feature engineering, imbalance handling, threshold tuning, and evaluation optimization — and deployed the model in the customer care agent interface to flag high-risk cases in real time; engineered additional features from 200K+ support incidents using LLM-based summarization.",
-      "Performed logistic regression for week-over-week (WoW) analysis and implemented causal modeling to identify true performance drivers, uncovering a 350+ bps controllable improvement opportunity."
+      "Trained models on highly imbalanced large-scale datasets with 2.8Cr+ conversation-level records and 70K+ escalation cases, plus 60L+ agent-handled records with 65K+ escalation cases.",
+      "Built the complete ML pipeline with feature engineering, imbalance handling, threshold tuning, and evaluation optimization, and deployed it into the customer-care agent interface to flag high-risk cases in real time.",
+      "Performed logistic regression for week-over-week analysis and implemented causal modeling to uncover a 350+ bps controllable improvement opportunity."
     ],
     skills: ["Python", "SQL", "XGBoost", "Logistic Regression", "Causal Modeling", "Machine Learning", "GenAI", "LLMs"],
     certificateLink: "https://drive.google.com/file/d/1GtrtBYnXmZx7WB-v2Mwkgh2WCjJRG9lb/view"
@@ -105,14 +106,14 @@ export const PROJECTS: ProjectItem[] = [
     id: "intervuex",
     title: "Intervuex",
     shortDesc: "A full-stack interview scheduling platform with admin and HR workspaces, conflict-aware scheduling, and candidate analytics.",
-    longDesc: "Built a full-stack interview scheduling platform with separate Admin and HR workspaces, automatic conflict-aware panel scheduling, candidate pipeline tracking, and analytics dashboards. Implemented JWT-based role authentication and workspace onboarding via unique Space Codes, deployed on Vercel + Railway + MongoDB Atlas.",
+    longDesc: "Built a full-stack interview scheduling platform with separate Admin and HR workspaces, automatic conflict-aware panel scheduling, candidate pipeline tracking, and analytics dashboards. The system improves coordination and reduces manual interview overhead.",
     tech: ["React.js", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT"],
     githubUrl: "https://github.com/Mahammad1500/Intervuex",
     liveUrl: "https://intervuex-nine.vercel.app",
     demoUrl: "https://intervuex-demo.vercel.app",
     category: "Full Stack",
     features: [
-      "Separate Admin and HR workspaces with role-based access control.",
+      "Separate Admin and HR workspaces with role-based access.",
       "Automatic conflict-aware interviewer scheduling for panel interviews.",
       "Candidate pipeline tracking and analytics dashboards.",
       "JWT-based authentication and workspace onboarding using unique Space Codes."
@@ -125,15 +126,15 @@ export const PROJECTS: ProjectItem[] = [
     id: "student-feedback",
     title: "Student Feedback Portal",
     shortDesc: "A secure portal for collecting and analyzing student feedback with role-based access and privacy-focused workflows.",
-    longDesc: "Developed a web platform that replaces manual feedback collection with a secure digital workflow. The system supports Student, Teacher, and Admin roles and provides clear, privacy-safe handling of feedback data, reducing paperwork by 80%.",
+    longDesc: "Developed a web platform that replaces manual feedback collection with a secure digital workflow. The system supports Student, Teacher, and Admin roles and provides clear, privacy-safe handling of feedback data.",
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JavaScript"],
     githubUrl: "https://github.com/Mahammad1500/Student-Feedback-Portal",
     liveUrl: "https://github.com/Mahammad1500/Student-Feedback-Portal",
     category: "Full Stack",
     features: [
       "Secure authentication for Student, Teacher, and Admin roles.",
-      "Digital feedback collection that reduces paperwork by 80%.",
-      "Structured data handling designed for 100% privacy and compliance."
+      "Digital feedback collection that reduces paperwork and manual processing.",
+      "Structured data handling designed for privacy and compliance."
     ],
     challenges: "Building a trusted feedback system that preserves privacy while offering a smooth experience for different academic roles.",
     impact: "Reduced manual feedback processing workload by about 80% and improved the reliability of institutional reporting.",
@@ -162,8 +163,8 @@ export const SKILLS: SkillCategory[] = [
       { name: "Redux", level: 78 },
       { name: "Node.js", level: 84 },
       { name: "Express.js", level: 84 },
-      { name: "Tailwind CSS", level: 88 },
-      { name: "Ruby on Rails", level: 72 }
+      { name: "Ruby on Rails", level: 72 },
+      { name: "Tailwind CSS", level: 88 }
     ]
   },
   {
@@ -192,10 +193,10 @@ export const SKILLS: SkillCategory[] = [
       { name: "GitHub", level: 92 },
       { name: "Linux", level: 84 },
       { name: "VS Code", level: 95 },
-      { name: "Cursor", level: 88 },
-      { name: "Claude Code", level: 82 },
       { name: "GitHub Copilot", level: 90 },
-      { name: "Windsurf", level: 84 }
+      { name: "Cursor", level: 88 },
+      { name: "Windsurf", level: 84 },
+      { name: "Claude Code", level: 82 }
     ]
   }
 ];
@@ -243,18 +244,19 @@ export const EDUCATION: EducationItem[] = [
     institution: "Indian Institute of Information Technology, Lucknow (IIITL)",
     degree: "Bachelor of Technology in Computer Science",
     duration: "Nov 2022 — June 2026",
-    grade: "CGPA: 8.35/10",
+    grade: "CGPA: 8.20/10",
+    courseStructureLink: "https://iiitl.ac.in/wp-content/uploads/2022/10/Course-Structure-CS.pdf",
     coursework: ["Operating Systems", "Software Engineering", "Computer Networks", "Machine Learning", "Data Structures and Algorithms", "Database Management Systems", "Object-Oriented Programming Systems"]
   },
   {
     institution: "Resonance Junior College",
-    degree: "Intermediate (12th Grade)",
+    degree: "Intermediate (12th Grade), Telangana State Board",
     duration: "Nov 2020 — July 2022",
     grade: "Percentage: 97.5%"
   },
   {
     institution: "Sri Chaitanya Techno School",
-    degree: "Secondary Education (10th Grade)",
+    degree: "Secondary Education (10th Grade), BSE AP",
     duration: "July 2019 — April 2020",
     grade: "Percentage: 99.20%"
   }

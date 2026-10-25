@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ExternalLink, X, CheckCircle, Flame, Target, Trophy, Sparkles, ArrowUpRight } from "lucide-react";
+import { Search, ExternalLink, X, CheckCircle, Flame, Target, Trophy, Sparkles, Maximize2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { PROJECTS, ProjectItem } from "@/lib/data";
 import { sounds } from "@/lib/sound";
@@ -52,6 +52,7 @@ export default function Projects() {
             src="/images/anywhere_door.jpg"
             alt="3D Anywhere Door Dokodemo Door"
             fill
+            sizes="128px"
             className="object-cover hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent flex items-end p-2">
@@ -107,18 +108,18 @@ export default function Projects() {
               onClick={() => handleOpenModal(project)}
             >
               {/* Card Header Bar */}
-              <div className="p-6 sm:p-8 border-b border-slate-100 bg-sky-50/50 flex items-start justify-between gap-4">
+              <div className="p-6 sm:p-8 border-b border-sky-100 bg-gradient-to-br from-sky-50 to-blue-50/40 flex items-start justify-between gap-4">
                 <div>
-                  <span className="px-3 py-1 rounded-full bg-white border border-sky-200 text-sky-700 text-xs font-bold uppercase tracking-wider inline-block mb-3 shadow-sm">
-                    {project.category}
+                  <span className="px-3 py-1 rounded-full bg-white border border-sky-300 text-sky-700 text-xs font-bold uppercase tracking-wider inline-block mb-3 shadow-sm">
+                    🚪 {project.category}
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-bold font-title text-slate-900 group-hover:text-sky-600 transition-colors">
                     {project.title}
                   </h3>
                 </div>
 
-                <div className="p-2.5 rounded-2xl bg-white border border-sky-200 text-slate-500 group-hover:text-sky-600 group-hover:border-sky-400 transition-all shadow-sm">
-                  <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <div className="p-2.5 rounded-2xl bg-white border-2 border-sky-200 text-sky-500 group-hover:text-sky-600 group-hover:border-sky-400 transition-all shadow-sm shrink-0">
+                  <Maximize2 className="w-5 h-5" />
                 </div>
               </div>
 
@@ -151,46 +152,44 @@ export default function Projects() {
                 </div>
 
                 {/* Action Links */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center flex-wrap gap-2 pt-4 border-t border-slate-100">
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="p-2 rounded-xl bg-slate-50 border border-slate-200 hover:border-sky-400 text-slate-600 hover:text-sky-600 transition-all"
+                    title="GitHub Repository"
+                  >
+                    <FaGithub className="w-4 h-4" />
+                  </a>
+                  {project.liveUrl && project.liveUrl !== project.githubUrl && (
                     <a
-                      href={project.githubUrl}
+                      href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="p-2 rounded-xl bg-slate-50 border border-slate-200 hover:border-sky-400 text-slate-600 hover:text-sky-600 transition-all"
-                      aria-label="GitHub Repository"
+                      className="px-3.5 py-1.5 rounded-xl bg-sky-50 border border-sky-200 hover:bg-sky-100 text-sky-700 text-xs font-semibold transition-all flex items-center gap-1.5"
                     >
-                      <FaGithub className="w-4 h-4" />
+                      <ExternalLink className="w-3 h-3" />
+                      <span>Live App</span>
                     </a>
-                    {project.liveUrl && project.liveUrl !== project.githubUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="px-3.5 py-1.5 rounded-xl bg-sky-50 border border-sky-200 hover:bg-sky-100 text-sky-700 text-xs font-semibold transition-all flex items-center gap-1.5"
-                      >
-                        <ExternalLink className="w-3 h-3" />
-                        <span>Live App</span>
-                      </a>
-                    )}
-                    {project.demoUrl && (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="px-3.5 py-1.5 rounded-xl bg-pink-50 border border-pink-200 hover:bg-pink-100 text-pink-700 text-xs font-semibold transition-all flex items-center gap-1.5"
-                      >
-                        <ExternalLink className="w-3 h-3" />
-                        <span>UI Demo</span>
-                      </a>
-                    )}
-                  </div>
+                  )}
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="px-3.5 py-1.5 rounded-xl bg-pink-50 border border-pink-200 hover:bg-pink-100 text-pink-700 text-xs font-semibold transition-all flex items-center gap-1.5"
+                    >
+                      <span>🚪</span>
+                      <span>UI Demo</span>
+                    </a>
+                  )}
 
-                  <span className="text-xs font-bold text-sky-600 group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                    <span>Architecture Details</span>
+                  <span className="text-xs font-bold text-sky-600 group-hover:translate-x-1 transition-transform flex items-center gap-1 ml-auto">
+                    <span>Details</span>
                     <span>→</span>
                   </span>
                 </div>
@@ -296,7 +295,18 @@ export default function Projects() {
                         className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-500 font-bold text-xs uppercase tracking-wider text-white transition-all shadow-md shadow-sky-500/20"
                       >
                         <ExternalLink className="w-4 h-4" />
-                        <span>Launch Live Demo</span>
+                        <span>Launch Live App</span>
+                      </a>
+                    )}
+                    {selectedProject.demoUrl && (
+                      <a
+                        href={selectedProject.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-pink-500 hover:bg-pink-400 font-bold text-xs uppercase tracking-wider text-white transition-all shadow-md shadow-pink-400/20"
+                      >
+                        <span>🚪</span>
+                        <span>UI Demo</span>
                       </a>
                     )}
                   </div>

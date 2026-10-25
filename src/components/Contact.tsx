@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, Copy, Send, Check, Sparkles, CheckCircle2 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -39,27 +40,58 @@ export default function Contact() {
     sounds.playChime();
 
     try {
-      const res = await fetch("/api/contact", {
+      // Direct client-side submission to Web3Forms (required by Web3Forms free tier)
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "fb9b030a-a1bb-4973-bf86-2943a5cff9ed",
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          from_name: `${formData.name} (Portfolio)`,
+          subject: `📬 Transmission from ${formData.name}`,
+        }),
       });
 
-      if (!res.ok) {
-        throw new Error("Transmission error");
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+
+        confetti({
+          particleCount: 80,
+          spread: 60,
+          origin: { y: 0.7 },
+          colors: ["#0284C7", "#EF4444", "#FBBF24", "#38BDF8", "#FFFFFF"],
+        });
+      } else {
+        throw new Error(data.message || "Failed to deliver transmission");
       }
-
-      setSubmitted(true);
-      setFormData({ name: "", email: "", message: "" });
-
-      confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.7 },
-        colors: ["#0284C7", "#EF4444", "#FBBF24", "#38BDF8", "#FFFFFF"],
-      });
-    } catch {
-      setErrorMessage("Something went wrong. You can also reach out directly via email or LinkedIn!");
+    } catch (err: unknown) {
+      console.warn("Direct Web3Forms failed, falling back:", err);
+      // Try local fallback route or show friendly direct contact link
+      try {
+        const fallbackRes = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        if (fallbackRes.ok) {
+          setSubmitted(true);
+          setFormData({ name: "", email: "", message: "" });
+          return;
+        }
+      } catch {
+        // Ignore fallback error
+      }
+      setErrorMessage(
+        "Direct send was blocked. Please email directly at mahammadhussain1500@gmail.com!"
+      );
     } finally {
       setSending(false);
     }
@@ -139,6 +171,27 @@ export default function Contact() {
                   {PERSONAL_INFO.location}
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Doraemon Welcome Companion Card */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-sky-50 via-white to-sky-100/50 border border-sky-300 shadow-sm flex items-center gap-3.5">
+            <div className="relative w-14 h-14 rounded-2xl overflow-hidden shrink-0 border-2 border-white shadow-md bg-sky-200">
+              <Image
+                src="/images/doraemon_hero.jpg"
+                alt="Doraemon"
+                fill
+                sizes="56px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-sky-800">
+                22nd Century Carrier • Ready to Connect
+              </p>
+              <p className="text-[11px] text-slate-600 leading-snug mt-0.5">
+                Drop your thoughts, engineering challenges, or opportunities. Delivered straight to Mahammad&apos;s inbox!
+              </p>
             </div>
           </div>
 

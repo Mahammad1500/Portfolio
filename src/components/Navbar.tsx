@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Volume2, VolumeX } from "lucide-react";
 import { PERSONAL_INFO } from "@/lib/data";
@@ -9,6 +10,7 @@ import { sounds } from "@/lib/sound";
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
+  { id: "gadgets", label: "Gadgets" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
@@ -81,16 +83,22 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo with Golden Bell Icon */}
+          {/* Logo with Doraemon Emblem */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
             className="flex items-center gap-2.5 group cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 border-2 border-amber-200 flex items-center justify-center shadow-md shadow-amber-500/20 group-hover:scale-110 transition-transform">
-              <span className="text-xs">🔔</span>
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-sky-400 shadow-sm shrink-0 group-hover:scale-110 transition-transform bg-sky-100">
+              <Image
+                src="/images/doraemon_hero_3d.jpg"
+                alt="Doraemon"
+                fill
+                sizes="32px"
+                className="object-cover"
+              />
             </div>
-            <span className="text-sm sm:text-base font-extrabold font-title tracking-tight text-sky-900 group-hover:text-sky-600 transition-colors">
+            <span className="text-sm sm:text-base font-extrabold font-title tracking-tight text-sky-950 group-hover:text-sky-600 transition-colors">
               {PERSONAL_INFO.name}
             </span>
           </a>

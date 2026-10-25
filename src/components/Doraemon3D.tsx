@@ -100,69 +100,71 @@ export default function Doraemon3D() {
     faceMesh.position.set(0, 0.8, 1.02);
     root.add(faceMesh);
 
-    // ──── EYES — large anime ovals (key Doraemon feature) ─────────
-    // White eye base — wide oval, sits proud of the face
-    const eyeWhiteGeom = new THREE.SphereGeometry(0.48, 36, 36);
+    // ──── EYES (big, oval, anime-style) ──────────────────────────
+    const eyeGeom = new THREE.SphereGeometry(0.30, 32, 32);
 
-    const leftEyeWhite = new THREE.Mesh(eyeWhiteGeom, whiteMat);
-    leftEyeWhite.scale.set(0.78, 1.18, 0.30);  // wide & tall oval, flat
-    leftEyeWhite.position.set(-0.35, 1.18, 1.32);
+    const leftEyeWhite = new THREE.Mesh(eyeGeom, whiteMat);
+    leftEyeWhite.scale.set(0.8, 1.15, 0.36);
+    leftEyeWhite.position.set(-0.28, 1.14, 1.30);
     root.add(leftEyeWhite);
 
-    const rightEyeWhite = new THREE.Mesh(eyeWhiteGeom, whiteMat);
-    rightEyeWhite.scale.set(0.78, 1.18, 0.30);
-    rightEyeWhite.position.set(0.35, 1.18, 1.32);
+    const rightEyeWhite = new THREE.Mesh(eyeGeom, whiteMat);
+    rightEyeWhite.scale.set(0.8, 1.15, 0.36);
+    rightEyeWhite.position.set(0.28, 1.14, 1.30);
     root.add(rightEyeWhite);
 
-    // Black pupils — large, centered in the white
-    const pupilGeom = new THREE.SphereGeometry(0.19, 20, 20);
+    // Pupils — dark blue (not pure black — Doraemon's pupils are dark blue)
+    const pupilGeom = new THREE.SphereGeometry(0.12, 18, 18);
     const leftPupil = new THREE.Mesh(pupilGeom, darkBlueMat);
-    leftPupil.position.set(-0.33, 1.17, 1.44);
+    leftPupil.position.set(-0.26, 1.13, 1.42);
     root.add(leftPupil);
 
     const rightPupil = new THREE.Mesh(pupilGeom, darkBlueMat);
-    rightPupil.position.set(0.33, 1.17, 1.44);
+    rightPupil.position.set(0.26, 1.13, 1.42);
     root.add(rightPupil);
 
-    // White glint highlights in each eye
-    const glintGeom = new THREE.SphereGeometry(0.06, 10, 10);
+    // Pupil glints
+    const glintGeom = new THREE.SphereGeometry(0.04, 10, 10);
     const lg1 = new THREE.Mesh(glintGeom, glintMat);
-    lg1.position.set(-0.25, 1.25, 1.54);
+    lg1.position.set(-0.21, 1.18, 1.49);
     root.add(lg1);
     const lg2 = new THREE.Mesh(glintGeom, glintMat);
-    lg2.position.set(0.41, 1.25, 1.54);
+    lg2.position.set(0.31, 1.18, 1.49);
     root.add(lg2);
 
     // ──── NOSE ────────────────────────────────────────────────────
-    const noseMesh = new THREE.Mesh(new THREE.SphereGeometry(0.21, 28, 28), redMat);
-    noseMesh.position.set(0, 0.80, 1.44);
+    const noseMesh = new THREE.Mesh(new THREE.SphereGeometry(0.20, 28, 28), redMat);
+    noseMesh.position.set(0, 0.82, 1.42);
     root.add(noseMesh);
     // Nose glint
-    const noseGlint = new THREE.Mesh(new THREE.SphereGeometry(0.055, 8, 8), glintMat);
-    noseGlint.position.set(0.06, 0.87, 1.59);
+    const noseGlint = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), glintMat);
+    noseGlint.position.set(0.05, 0.88, 1.57);
     root.add(noseGlint);
 
-    // ──── WHISKERS — 6 lines on white face ───────────────────────
-    const whiskerMat = new THREE.MeshBasicMaterial({ color: 0x0c3d5e });
-    // Each whisker is a thin cylinder laid horizontally
-    const makeWhisker = (px: number, py: number, tiltX: number) => {
-      const wg = new THREE.CylinderGeometry(0.016, 0.016, 0.80, 8);
-      const w = new THREE.Mesh(wg, whiskerMat);
-      w.rotation.z = Math.PI / 2;          // lay flat (horizontal)
-      w.rotation.y = tiltX;                // slight angle
-      w.position.set(px, py, 1.38);        // sit on face surface
+    // ──── WHISKERS (6 lines total, 3 per side) ───────────────────
+    const whiskerMat = new THREE.MeshBasicMaterial({ color: 0x1e3a5f });
+    const whiskerGeom = new THREE.CylinderGeometry(0.013, 0.013, 0.85, 8);
+    const whiskers: { mesh: THREE.Mesh; baseX: number; baseY: number; rotZ: number; side: number }[] = [];
+
+    const whiskerDefs = [
+      // Left side [x, y, rotZ, side(-1 left, 1 right)]
+      [-0.55, 0.62, -0.15, -1],
+      [-0.55, 0.50, 0, -1],
+      [-0.55, 0.38, 0.15, -1],
+      // Right side
+      [0.55, 0.62, 0.15, 1],
+      [0.55, 0.50, 0, 1],
+      [0.55, 0.38, -0.15, 1],
+    ];
+
+    whiskerDefs.forEach(([x, y, rotZ, side]) => {
+      const w = new THREE.Mesh(whiskerGeom, whiskerMat);
+      w.rotation.z = Math.PI / 2; // horizontal
+      w.rotation.x = (rotZ as number) * 0.3;
+      w.position.set((x as number) * (side as number), y as number, 1.22);
       root.add(w);
-      return w;
-    };
-    // Left side — 3 whiskers
-    makeWhisker(-0.60, 0.66, -0.10);
-    makeWhisker(-0.60, 0.52, 0);
-    makeWhisker(-0.60, 0.38, 0.10);
-    // Right side — 3 whiskers
-    makeWhisker(0.60, 0.66, 0.10);
-    makeWhisker(0.60, 0.52, 0);
-    makeWhisker(0.60, 0.38, -0.10);
-    const whiskers: THREE.Mesh[] = [];
+      whiskers.push({ mesh: w, baseX: (x as number) * (side as number), baseY: y as number, rotZ: rotZ as number, side: side as number });
+    });
 
     // ──── MOUTH ───────────────────────────────────────────────────
     // Curved smile using CatmullRomCurve3
@@ -187,34 +189,26 @@ export default function Doraemon3D() {
     collarMesh.position.set(0, -0.05, 0.08);
     root.add(collarMesh);
 
-    // ──── GOLDEN BELL ─────────────────────────────────────────────
+    // ──── GADGET MEDALLION (NO BELL) ────────────────────────────
     const bellGroup = new THREE.Group();
     bellGroup.position.set(0, -0.22, 1.18);
     root.add(bellGroup);
 
-    const bellMesh = new THREE.Mesh(new THREE.SphereGeometry(0.27, 28, 28), goldMat);
-    bellGroup.add(bellMesh);
-
-    // Bell equator line
-    const bellLineMesh = new THREE.Mesh(
-      new THREE.TorusGeometry(0.272, 0.022, 10, 28),
-      new THREE.MeshBasicMaterial({ color: 0x7c4b00 })
+    // Sleek round gadget medallion
+    const medallionMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.24, 0.24, 0.08, 32),
+      goldMat
     );
-    bellLineMesh.rotation.x = Math.PI / 2;
-    bellGroup.add(bellLineMesh);
+    medallionMesh.rotation.x = Math.PI / 2;
+    bellGroup.add(medallionMesh);
 
-    // Bell hole (bottom)
-    const bellHoleMesh = new THREE.Mesh(
-      new THREE.SphereGeometry(0.05, 10, 10),
-      new THREE.MeshBasicMaterial({ color: 0x3d2000 })
+    // Cyan core gem
+    const coreGem = new THREE.Mesh(
+      new THREE.SphereGeometry(0.12, 16, 16),
+      new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.1, metalness: 0.8 })
     );
-    bellHoleMesh.position.set(0, -0.22, 0.25);
-    bellGroup.add(bellHoleMesh);
-
-    // Bell glint
-    const bellGlint = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 8), glintMat);
-    bellGlint.position.set(-0.1, 0.12, 0.24);
-    bellGroup.add(bellGlint);
+    coreGem.position.z = 0.05;
+    bellGroup.add(coreGem);
 
     // ──── BODY ────────────────────────────────────────────────────
     const bodyMesh = new THREE.Mesh(new THREE.SphereGeometry(1.28, 44, 44), blueMat);
@@ -416,15 +410,15 @@ export default function Doraemon3D() {
       root.rotation.x = -mouse.y * 0.18;
 
       // Eyes follow cursor
-      leftPupil.position.x = -0.33 + mouse.x * 0.07;
-      leftPupil.position.y = 1.17 + mouse.y * 0.06;
-      rightPupil.position.x = 0.33 + mouse.x * 0.07;
-      rightPupil.position.y = 1.17 + mouse.y * 0.06;
+      leftPupil.position.x = -0.26 + mouse.x * 0.07;
+      leftPupil.position.y = 1.13 + mouse.y * 0.06;
+      rightPupil.position.x = 0.26 + mouse.x * 0.07;
+      rightPupil.position.y = 1.13 + mouse.y * 0.06;
       // Glints follow too
-      lg1.position.x = -0.25 + mouse.x * 0.07;
-      lg1.position.y = 1.25 + mouse.y * 0.06;
-      lg2.position.x = 0.41 + mouse.x * 0.07;
-      lg2.position.y = 1.25 + mouse.y * 0.06;
+      lg1.position.x = -0.21 + mouse.x * 0.07;
+      lg1.position.y = 1.18 + mouse.y * 0.06;
+      lg2.position.x = 0.31 + mouse.x * 0.07;
+      lg2.position.y = 1.18 + mouse.y * 0.06;
 
       // Hands sway
       leftHand.position.y = -0.9 + Math.sin(t * 2.2 + 0.5) * 0.09;
@@ -448,15 +442,15 @@ export default function Doraemon3D() {
       if (isBlinking) {
         blinkPhase += delta;
         const closeRatio = blinkPhase < 0.07 ? blinkPhase / 0.07 : Math.max(0, 1 - (blinkPhase - 0.07) / 0.10);
-        const scaleY = 1.18 - closeRatio * 1.08;
+        const scaleY = 1.15 - closeRatio * 1.05;
         leftEyeWhite.scale.y = scaleY;
         rightEyeWhite.scale.y = scaleY;
         if (blinkPhase >= 0.17) {
           isBlinking = false;
           blinkTimer = 0;
           nextBlink = 2.5 + Math.random() * 3.5;
-          leftEyeWhite.scale.y = 1.18;
-          rightEyeWhite.scale.y = 1.18;
+          leftEyeWhite.scale.y = 1.15;
+          rightEyeWhite.scale.y = 1.15;
         }
       }
 
@@ -518,11 +512,12 @@ export default function Doraemon3D() {
         ref={containerRef}
         onClick={handleClick}
         className="w-[300px] h-[340px] sm:w-[380px] sm:h-[420px] cursor-pointer touch-none relative z-10"
+        title="Interactive 3D Doraemon — Move your cursor to guide eyes! Click to spin the Take-copter!"
       />
       {/* Hint badge */}
       <div className="mt-3 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 border border-sky-300/50 text-sky-700 text-xs font-semibold shadow-sm backdrop-blur-sm">
-        <span className="animate-pulse text-amber-500">🔔</span>
-        <span>Move cursor to guide eyes · Click to spin Take-copter!</span>
+        <span className="text-sky-600">🌀</span>
+        <span>Move cursor to guide 3D eyes · Click to spin Take-copter!</span>
       </div>
     </div>
   );

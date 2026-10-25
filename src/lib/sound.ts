@@ -18,97 +18,18 @@ class SoundManager {
     return this.ctx;
   }
 
-  // Play a pleasant bell / gadget chime
+  // Bell chime completely disabled per user preference — only song plays
   public playChime() {
-    if (!this.enabled) return;
-    try {
-      const ctx = this.getContext();
-      if (!ctx) return;
-
-      const now = ctx.currentTime;
-      // Dual tone bell chime (E6 + B6)
-      const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc1.type = "sine";
-      osc1.frequency.setValueAtTime(1318.51, now); // E6
-      osc1.frequency.exponentialRampToValueAtTime(1318.51 * 0.98, now + 0.5);
-
-      osc2.type = "triangle";
-      osc2.frequency.setValueAtTime(1975.53, now); // B6
-      osc2.frequency.exponentialRampToValueAtTime(1975.53 * 0.98, now + 0.4);
-
-      gain.gain.setValueAtTime(0.12, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-
-      osc1.connect(gain);
-      osc2.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc1.start(now);
-      osc2.start(now);
-      osc1.stop(now + 0.6);
-      osc2.stop(now + 0.6);
-    } catch {
-      // Audio autoplay policy catch
-    }
+    // Silent: no bell sound on click
   }
 
-  // Play a gentle gadget pop / drawer open sound
+  // Gentle sound effects silenced so only background song plays
   public playGadgetPop() {
-    if (!this.enabled) return;
-    try {
-      const ctx = this.getContext();
-      if (!ctx) return;
-
-      const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(440, now);
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
-
-      gain.gain.setValueAtTime(0.1, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.2);
-    } catch {
-      // Ignore
-    }
+    // Silent
   }
 
-  // Play anywhere door swoosh
   public playDoorSwoosh() {
-    if (!this.enabled) return;
-    try {
-      const ctx = this.getContext();
-      if (!ctx) return;
-
-      const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(220, now);
-      osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.25);
-
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.35);
-    } catch {
-      // Ignore
-    }
+    // Silent
   }
 }
 

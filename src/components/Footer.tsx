@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowUp, Mail, Clock } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { PERSONAL_INFO } from "@/lib/data";
@@ -16,8 +17,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
         {/* Left: Branding & Info */}
         <div className="text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-            <span className="text-sm">🔔</span>
+          <div className="flex items-center justify-center md:justify-start gap-2.5 mb-1">
+            <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0 border border-sky-300 shadow-xs">
+              <Image
+                src="/images/doraemon_hero_3d.jpg"
+                alt="Doraemon"
+                fill
+                sizes="24px"
+                className="object-cover"
+              />
+            </div>
             <span className="font-bold font-title text-slate-900 text-sm">
               {PERSONAL_INFO.name}
             </span>

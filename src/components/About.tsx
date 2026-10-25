@@ -97,9 +97,21 @@ export default function About() {
                     <h3 className="font-bold text-sm sm:text-base text-slate-900">
                       {gadget.title}
                     </h3>
-                    <p className="text-xs text-sky-600 font-medium">
-                      {idx === 0 ? "CoinDCX FRP" : idx === 1 ? "Flipkart ML" : "Web Architecture"}
-                    </p>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      {idx === 0 && (
+                        <div className="relative h-3 w-14 shrink-0">
+                          <Image src="/images/coindcx-wordmark.png" alt="CoinDCX" fill sizes="56px" className="object-contain" />
+                        </div>
+                      )}
+                      {idx === 1 && (
+                        <div className="relative w-3.5 h-3.5 rounded-xs overflow-hidden shrink-0">
+                          <Image src="/images/flipkart-icon.png" alt="Flipkart" fill sizes="14px" className="object-contain" />
+                        </div>
+                      )}
+                      <p className="text-xs text-sky-600 font-medium">
+                        {idx === 0 ? "FRP Platform" : idx === 1 ? "Flipkart ML" : "Web Architecture"}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -113,21 +125,43 @@ export default function About() {
           </div>
 
           {/* 3D Memory Bread Feature Card */}
-          <div className="p-5 rounded-2xl bg-white border border-amber-300 shadow-md flex items-center gap-4">
-            <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-amber-200 shadow-sm">
+          <div className="p-4 rounded-2xl bg-white border border-amber-300 shadow-sm flex items-center gap-3.5">
+            <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-amber-200 shadow-sm">
               <Image
                 src="/images/memory_bread.jpg"
                 alt="3D Memory Bread Anki-pan"
                 fill
+                sizes="64px"
                 className="object-cover"
               />
             </div>
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-600 block mb-0.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 block mb-0.5">
                 Secret Gadget: Memory Bread
               </span>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Absorbing algorithms, distributed consensus, and system architectures with permanent retention.
+              </p>
+            </div>
+          </div>
+
+          {/* Doraemon Companion Card */}
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-sky-50 via-white to-sky-50/50 border border-sky-300 shadow-sm flex items-center gap-3.5">
+            <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border-2 border-white shadow-md bg-sky-100">
+              <Image
+                src="/images/doraemon_hero.jpg"
+                alt="Doraemon Flying Companion"
+                fill
+                sizes="64px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700 block mb-0.5">
+                22nd Century Companion • Doraemon
+              </span>
+              <p className="text-xs text-slate-700 font-medium leading-relaxed">
+                Empowering engineering systems with relentless curiosity, scalability, and 4D problem-solving.
               </p>
             </div>
           </div>
