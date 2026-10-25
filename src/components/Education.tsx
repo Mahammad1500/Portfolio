@@ -1,77 +1,91 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal, GraduationCap, Calendar, Award, BookOpen } from "lucide-react";
+import { GraduationCap, Calendar, Award, BookOpen, Sparkles, ExternalLink } from "lucide-react";
 import { EDUCATION } from "@/lib/data";
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 px-6 md:px-12 max-w-5xl mx-auto scroll-mt-12">
-      <div className="flex items-center gap-3 mb-4">
-        <Terminal className="w-5 h-5 text-cyan-400" />
-        <span className="text-xs uppercase tracking-widest text-cyan-400 font-bold">
-          06. Education
-        </span>
+    <section id="education" className="py-24 px-6 md:px-12 max-w-5xl mx-auto scroll-mt-16">
+      {/* Section Header */}
+      <div className="mb-12">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-sky-300 text-sky-800 text-xs font-semibold mb-3 shadow-sm">
+          <Sparkles className="w-3.5 h-3.5 text-sky-600" />
+          <span>Academic Foundations • Education</span>
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-black font-title tracking-tight text-slate-900">
+          Academic <span className="text-sky-600">Background</span>
+        </h2>
+        <p className="text-slate-600 text-base sm:text-lg max-w-xl mt-3 leading-relaxed">
+          Computer Science foundations rooted in algorithms, distributed systems, operating systems, and software engineering.
+        </p>
       </div>
 
-      <h2 className="text-3xl md:text-5xl font-black font-title tracking-tight mb-16">
-        Academic <span className="text-cyan-400 font-extrabold">Background</span>
-      </h2>
-
-      <div className="relative border-l border-slate-800 ml-4 md:ml-12 pl-8 md:pl-16 space-y-12">
+      {/* Timeline track */}
+      <div className="relative border-l-2 border-sky-300 ml-4 md:ml-8 pl-6 md:pl-12 space-y-10">
         {EDUCATION.map((edu, idx) => (
           <motion.div
             key={edu.institution}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.4, delay: idx * 0.1 }}
             className="relative"
           >
             {/* Timeline Cap Icon */}
-            <span className="absolute -left-[53px] md:-left-[85px] top-1.5 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-900 border-2 border-cyan-500/80 shadow-[0_0_12px_rgba(6,182,212,0.3)] z-10">
-              <GraduationCap className="w-5 h-5 text-cyan-400" />
+            <span className="absolute -left-[35px] md:-left-[59px] top-1.5 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-2 border-sky-500 shadow-md z-10">
+              <GraduationCap className="w-4 h-4 text-sky-600" />
             </span>
 
             {/* Card Content */}
-            <div className="p-8 rounded-2xl glass-panel relative border border-slate-800 hover:border-cyan-500/10 transition-all duration-300">
-              {/* Glow background */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-500/5 to-transparent blur-xl pointer-events-none" />
-
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div className="p-7 sm:p-8 rounded-3xl bg-white/85 border border-sky-200 hover:border-sky-400 transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <div>
-                  <h3 className="text-xl md:text-2xl font-extrabold font-title text-white">
+                  <h3 className="text-xl sm:text-2xl font-bold font-title text-slate-900">
                     {edu.institution}
                   </h3>
-                  <p className="text-cyan-400 font-semibold mt-1">
-                    {edu.degree}
-                  </p>
+                  <div className="flex items-center gap-2 flex-wrap mt-1">
+                    <p className="text-sky-700 font-semibold text-sm sm:text-base">
+                      {edu.degree}
+                    </p>
+                    {edu.courseStructureLink && (
+                      <a
+                        href={edu.courseStructureLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-amber-600 hover:text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200 transition-colors"
+                      >
+                        <span>Course Structure</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap gap-4 text-xs font-semibold text-slate-400">
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/60 border border-slate-800">
-                    <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-700">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <Calendar className="w-3.5 h-3.5 text-sky-600" />
                     <span>{edu.duration}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/60 border border-slate-800">
-                    <Award className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-white">{edu.grade}</span>
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-800 font-bold">
+                    <Award className="w-3.5 h-3.5 text-amber-500" />
+                    <span>{edu.grade}</span>
                   </div>
                 </div>
               </div>
 
               {/* Coursework list for IIIT Lucknow */}
               {edu.coursework && edu.coursework.length > 0 && (
-                <div className="pt-4 border-t border-slate-800/60">
-                  <div className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-wider mb-3">
-                    <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Relevant Coursework:</span>
+                <div className="pt-4 border-t border-slate-100">
+                  <div className="flex items-center gap-2 text-slate-500 text-xs font-bold uppercase tracking-wider mb-2.5">
+                    <BookOpen className="w-3.5 h-3.5 text-sky-600" />
+                    <span>Core Curricula:</span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {edu.coursework.map((course) => (
                       <span
                         key={course}
-                        className="px-3 py-1 rounded bg-slate-900 border border-slate-850 text-xs text-slate-300 font-medium"
+                        className="px-2.5 py-1 rounded-lg bg-sky-50 border border-sky-100 text-xs text-sky-900 font-medium"
                       >
                         {course}
                       </span>

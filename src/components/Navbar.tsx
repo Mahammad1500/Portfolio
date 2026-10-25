@@ -1,40 +1,37 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight, Moon, Sun } from "lucide-react";
+import { Menu, X, Volume2, VolumeX } from "lucide-react";
 import { PERSONAL_INFO } from "@/lib/data";
+import { sounds } from "@/lib/sound";
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
+  { id: "gadgets", label: "Gadgets" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "achievements", label: "Achievements" },
   { id: "education", label: "Education" },
-  { id: "contact", label: "Contact" }
+  { id: "contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [audioEnabled, setAudioEnabled] = useState(true);
 
   useEffect(() => {
-    const storedTheme = window.localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
-    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-    const initialTheme = storedTheme ?? (prefersLight ? "light" : "dark");
-    setTheme(initialTheme);
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    // Track active section on scroll using Intersection Observer
     const observers = NAV_ITEMS.map((item) => {
       const el = document.getElementById(item.id);
       if (!el) return null;
@@ -45,9 +42,7 @@ export default function Navbar() {
             setActiveSection(item.id);
           }
         },
-        {
-          rootMargin: "-20% 0px -60% 0px", // triggers when section is in the middle of viewport
-        }
+        { rootMargin: "-20% 0px -60% 0px" }
       );
       observer.observe(el);
       return { observer, el };
@@ -61,14 +56,16 @@ export default function Navbar() {
     };
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("theme-light", theme === "light");
-    document.documentElement.classList.toggle("theme-dark", theme === "dark");
-    window.localStorage.setItem("portfolio-theme", theme);
-  }, [theme]);
+  const toggleAudio = () => {
+    const newState = !audioEnabled;
+    setAudioEnabled(newState);
+    sounds.enabled = newState;
+    if (newState) sounds.playChime();
+  };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    sounds.playChime();
     const el = document.getElementById(id);
     if (el) {
       setMobileMenuOpen(false);
@@ -81,82 +78,95 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? "glass-nav py-4 shadow-lg shadow-black/10"
-            : "bg-transparent py-6 border-b border-transparent"
+            ? "bg-white/80 backdrop-blur-md py-3.5 border-b border-sky-200/80 shadow-md shadow-sky-100/40"
+            : "bg-transparent py-5 border-b border-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo - Hidden on dark mode, visible only when needed */}
+          {/* Logo with Doraemon Emblem */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="text-lg font-bold font-title tracking-wider text-gradient hidden"
+            className="flex items-center gap-2.5 group cursor-pointer"
           >
-            <span>Portfolio</span>
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-sky-400 shadow-sm shrink-0 group-hover:scale-110 transition-transform bg-sky-100">
+              <Image
+                src="/images/doraemon_hero_3d.jpg"
+                alt="Doraemon"
+                fill
+                sizes="32px"
+                className="object-cover"
+              />
+            </div>
+            <span className="text-sm sm:text-base font-extrabold font-title tracking-tight text-sky-950 group-hover:text-sky-600 transition-colors">
+              {PERSONAL_INFO.name}
+            </span>
           </a>
 
-          {/* Desktop Menu */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-1 bg-white/70 border border-sky-200/80 px-3 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
-                className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors ${
-                  activeSection === item.id ? "text-cyan-400" : "text-slate-300 hover:text-white"
+                className={`relative px-3.5 py-1 text-xs font-semibold tracking-wide transition-all rounded-full ${
+                  activeSection === item.id
+                    ? "text-sky-700 bg-sky-100 border border-sky-300"
+                    : "text-slate-600 hover:text-sky-700 hover:bg-sky-50"
                 }`}
               >
-                {item.label}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
+                <span>{item.label}</span>
               </a>
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Controls: Audio Toggle & Action Buttons */}
+          <div className="hidden lg:flex items-center gap-2.5">
             <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2.5 rounded-full border border-slate-700/70 bg-slate-900/70 text-slate-300 hover:text-white hover:border-cyan-400/40 transition-all"
-              aria-label="Toggle color theme"
+              onClick={toggleAudio}
+              className={`p-2 rounded-xl border transition-all cursor-pointer ${
+                audioEnabled
+                  ? "bg-amber-50 border-amber-300 text-amber-600 hover:bg-amber-100"
+                  : "bg-white border-slate-200 text-slate-400 hover:text-slate-600"
+              }`}
+              title={audioEnabled ? "Sound Effects On (Click to Mute)" : "Sound Effects Muted (Click to Enable)"}
+              aria-label="Toggle sound effects"
             >
-              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {audioEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
             </button>
+
             <a
               href={PERSONAL_INFO.resumeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative group px-5 py-2.5 rounded-full overflow-hidden border border-slate-400/30 hover:border-slate-600 text-xs font-semibold uppercase tracking-wider text-slate-600 hover:text-white flex items-center gap-1.5 transition-all duration-300"
+              onClick={() => sounds.playChime()}
+              className="px-3.5 py-2 rounded-xl bg-white hover:bg-sky-50 border border-sky-200 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-sky-700 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
             >
-              <span className="relative z-10">📄 Resume</span>
+              <span>Resume</span>
             </a>
+
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "contact")}
-              className="relative group px-5 py-2.5 rounded-full overflow-hidden border border-cyan-500/30 hover:border-cyan-400 text-xs font-semibold uppercase tracking-wider text-cyan-400 hover:text-white flex items-center gap-1.5 transition-all duration-300 shadow-md hover:shadow-cyan-500/10"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-400 hover:to-blue-400 text-xs font-bold uppercase tracking-wider text-white transition-all shadow-md shadow-sky-400/25 cursor-pointer"
             >
-              <span className="relative z-10">Get In Touch</span>
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-0" />
+              <span>Connect</span>
             </a>
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-slate-300 hover:text-white transition-colors focus:outline-none"
-            aria-label="Toggle menu"
+            className="lg:hidden p-2 rounded-xl bg-white border border-sky-200 text-sky-700 hover:bg-sky-50 transition-colors shadow-sm"
+            aria-label="Toggle mobile menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -164,41 +174,48 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-0 left-0 w-full h-screen bg-[#020617] z-30 pt-28 px-8 flex flex-col justify-start gap-8"
+            className="fixed inset-0 top-0 left-0 w-full h-screen bg-white/95 z-30 pt-28 px-8 flex flex-col justify-start gap-5 backdrop-blur-xl overflow-y-auto"
           >
-            {/* Background overlay lights for drawer */}
-            <div className="absolute top-1/4 right-0 w-72 h-72 rounded-full bg-cyan-500/5 blur-3xl pointer-events-none" />
-            <div className="absolute bottom-1/4 left-0 w-72 h-72 rounded-full bg-blue-500/5 blur-3xl pointer-events-none" />
-
-            <nav className="flex flex-col gap-6 text-2xl font-bold tracking-wide">
+            <nav className="flex flex-col gap-3">
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={(e) => handleNavClick(e, item.id)}
-                  className={`flex items-center justify-between border-b border-slate-800/50 pb-4 ${
-                    activeSection === item.id ? "text-cyan-400" : "text-slate-300"
+                  className={`flex items-center justify-between border-b border-sky-100 pb-3 text-base font-semibold ${
+                    activeSection === item.id ? "text-sky-600" : "text-slate-700"
                   }`}
                 >
                   <span>{item.label}</span>
-                  <span className="text-xs text-slate-500 font-normal">
+                  <span className="text-xs text-slate-400 font-mono">
                     0{NAV_ITEMS.indexOf(item) + 1}
                   </span>
                 </a>
               ))}
             </nav>
 
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="mt-4 flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-slate-700 bg-slate-900/70 text-sm font-semibold uppercase tracking-wider text-slate-200"
-            >
-              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              <span>Toggle Theme</span>
-            </button>
+            <div className="flex items-center gap-3 mt-4">
+              <button
+                onClick={toggleAudio}
+                className="flex-1 py-3 rounded-xl bg-white border border-sky-200 text-xs font-bold text-slate-600 flex items-center justify-center gap-2"
+              >
+                {audioEnabled ? <Volume2 className="w-4 h-4 text-amber-500" /> : <VolumeX className="w-4 h-4" />}
+                <span>{audioEnabled ? "Sound On" : "Sound Off"}</span>
+              </button>
+              <a
+                href={PERSONAL_INFO.resumeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-3 text-center rounded-xl bg-white border border-sky-200 text-xs font-bold text-sky-700"
+              >
+                Resume
+              </a>
+            </div>
+
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "contact")}
-              className="mt-4 w-full py-4 text-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 font-semibold tracking-wider text-sm uppercase transition-all shadow-lg hover:shadow-cyan-500/20"
+              className="w-full py-3.5 text-center rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 font-bold text-xs uppercase tracking-wider text-white shadow-lg shadow-sky-400/25"
             >
               Get In Touch
             </a>

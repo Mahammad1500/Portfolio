@@ -16,6 +16,7 @@ export interface ProjectItem {
   tech: string[];
   githubUrl: string;
   liveUrl: string;
+  demoUrl?: string;
   features: string[];
   challenges: string;
   impact: string;
@@ -42,30 +43,32 @@ export interface EducationItem {
   duration: string;
   grade: string;
   coursework?: string[];
+  courseStructureLink?: string;
 }
 
 export const PERSONAL_INFO = {
   name: "Mahammad Hussain",
   roles: [
     "Software Development Engineer",
-    "Backend Engineer",
-    "Machine Learning Engineer",
-    "Full Stack Developer"
+    "Backend SDE",
+    "Full Stack SDE",
+    "Distributed Systems SDE"
   ],
-  bio: "Computer Science graduate from IIIT Lucknow building reliable backend systems, intelligent products, and polished full-stack experiences with a strong focus on impact and engineering quality.",
+  bio: "Computer Science graduate from IIIT Lucknow building high-performance backend platforms, distributed systems, and scalable web software.",
   email: "mahammadhussain1500@gmail.com",
   phone: "+91 9866067069",
   github: "https://github.com/Mahammad1500",
   linkedin: "https://www.linkedin.com/in/dudekulamahammadhussain",
   location: "Bengaluru, India",
-  resumeLink: "https://drive.google.com/file/d/1hXS6WcPS9CsegXGCfpxpzQnRCpDP-dR9/view?usp=sharing"
+  resumeLink: "https://drive.google.com/file/d/1dBY1eiRMH2hjRSNy7f42eG3giatdiuVs/view?usp=sharing",
+  portfolio: "https://mahammadhussain.vercel.app"
 };
 
 export const STATS = [
   { label: "Problems Solved", value: 500, suffix: "+" },
   { label: "Projects Built", value: 7, suffix: "+" },
   { label: "Internships", value: 2, suffix: "" },
-  { label: "CGPA", value: 8.35, suffix: "" },
+  { label: "CGPA", value: 8.20, suffix: "" },
   { label: "Experience", value: 6, suffix: "+ Months" }
 ];
 
@@ -76,11 +79,11 @@ export const EXPERIENCE: ExperienceItem[] = [
     duration: "07/2026 — Present",
     location: "Bengaluru, India",
     achievements: [
-      "Working with the Finance, Risk & Portfolio (FRP) engineering team to build backend services in Go and TypeScript for core financial and crypto trading workflows.",
-      "Implementing REST APIs and business logic for internal platform services with a strong focus on scalability, reliability, and production readiness.",
-      "Collaborating with cross-functional engineers to debug issues and ship meaningful features for the FRP platform."
+      "Working with the Finance, Risk & Portfolio (FRP) engineering team, building backend services using Go, TypeScript, Node.js, and Ruby on Rails for core financial and crypto trading workflows.",
+      "Implementing REST APIs and business logic for internal platform services, with a strong focus on scalability, reliability, and production readiness.",
+      "Debugging issues and collaborating with cross-functional engineers to ship production-ready features for the FRP platform."
     ],
-    skills: ["Go", "TypeScript", "REST APIs", "Backend Engineering", "Finance Systems", "Crypto Platforms"]
+    skills: ["Go", "TypeScript", "Node.js", "Ruby on Rails", "REST APIs", "Backend Engineering", "Finance Systems", "Crypto Platforms"]
   },
   {
     company: "Flipkart",
@@ -107,6 +110,7 @@ export const PROJECTS: ProjectItem[] = [
     tech: ["React.js", "Vite", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT"],
     githubUrl: "https://github.com/Mahammad1500/Intervuex",
     liveUrl: "https://intervuex-nine.vercel.app",
+    demoUrl: "https://intervuex-demo.vercel.app",
     category: "Full Stack",
     features: [
       "Separate Admin and HR workspaces with role-based access.",
@@ -159,6 +163,7 @@ export const SKILLS: SkillCategory[] = [
       { name: "Redux", level: 78 },
       { name: "Node.js", level: 84 },
       { name: "Express.js", level: 84 },
+      { name: "Ruby on Rails", level: 72 },
       { name: "Tailwind CSS", level: 88 }
     ]
   },
@@ -239,18 +244,19 @@ export const EDUCATION: EducationItem[] = [
     institution: "Indian Institute of Information Technology, Lucknow (IIITL)",
     degree: "Bachelor of Technology in Computer Science",
     duration: "Nov 2022 — June 2026",
-    grade: "CGPA: 8.35/10",
+    grade: "CGPA: 8.20/10",
+    courseStructureLink: "https://iiitl.ac.in/wp-content/uploads/2022/10/Course-Structure-CS.pdf",
     coursework: ["Operating Systems", "Software Engineering", "Computer Networks", "Machine Learning", "Data Structures and Algorithms", "Database Management Systems", "Object-Oriented Programming Systems"]
   },
   {
     institution: "Resonance Junior College",
-    degree: "Intermediate (12th Grade)",
+    degree: "Intermediate (12th Grade), Telangana State Board",
     duration: "Nov 2020 — July 2022",
     grade: "Percentage: 97.5%"
   },
   {
     institution: "Sri Chaitanya Techno School",
-    degree: "Secondary Education (10th Grade)",
+    degree: "Secondary Education (10th Grade), BSE AP",
     duration: "July 2019 — April 2020",
     grade: "Percentage: 99.20%"
   }

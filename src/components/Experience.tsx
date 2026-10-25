@@ -1,62 +1,117 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Terminal, Calendar, MapPin, Briefcase } from "lucide-react";
+import { Calendar, MapPin, ExternalLink, Sparkles, CheckCircle } from "lucide-react";
 import { EXPERIENCE } from "@/lib/data";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-6 md:px-12 max-w-5xl mx-auto scroll-mt-12">
-      <div className="flex items-center gap-3 mb-4">
-        <Terminal className="w-5 h-5 text-cyan-400" />
-        <span className="text-xs uppercase tracking-widest text-cyan-400 font-bold">
-          02. Experience
-        </span>
+    <section id="experience" className="py-24 px-6 md:px-12 max-w-5xl mx-auto scroll-mt-16">
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-amber-300 text-amber-800 text-xs font-semibold mb-3 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <span>Time Machine Career Journey • Experience</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black font-title tracking-tight text-slate-900">
+            Industry <span className="text-sky-600">Experience</span> & Impact
+          </h2>
+          <p className="text-slate-600 text-base sm:text-lg max-w-xl mt-3 leading-relaxed">
+            Hands-on software development engineering spanning high-scale backend platform services at CoinDCX and machine learning pipelines at Flipkart.
+          </p>
+        </div>
+
+        {/* 3D Vintage Time Machine Badge Banner */}
+        <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl overflow-hidden shrink-0 border-2 border-amber-300 shadow-md hidden sm:block">
+          <Image
+            src="/images/time_machine.jpg"
+            alt="3D Doraemon Time Machine"
+            fill
+            sizes="128px"
+            className="object-cover hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent flex items-end p-2">
+            <span className="text-[10px] font-bold text-amber-300 uppercase tracking-widest">
+              Time Machine
+            </span>
+          </div>
+        </div>
       </div>
 
-      <h2 className="text-3xl md:text-5xl font-black font-title tracking-tight mb-16">
-        Professional <span className="text-cyan-400 font-extrabold">Timeline</span>
-      </h2>
-
-      <div className="relative border-l border-slate-800 ml-4 md:ml-12 pl-8 md:pl-16 space-y-12">
+      {/* Clean Timeline */}
+      <div className="relative border-l-2 border-sky-300 ml-4 md:ml-8 pl-6 md:pl-12 space-y-12">
         {EXPERIENCE.map((exp, index) => (
           <motion.div
             key={exp.company + exp.role}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             className="relative"
           >
-            {/* Timeline node icon */}
-            <span className="absolute -left-[53px] md:-left-[85px] top-1.5 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-900 border-2 border-cyan-500/80 shadow-[0_0_12px_rgba(6,182,212,0.3)] z-10">
-              <Briefcase className="w-5 h-5 text-cyan-400" />
+            {/* Timeline Node Icon with Company Logo */}
+            <span className="absolute -left-[35px] md:-left-[59px] top-1.5 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-2 border-sky-400 shadow-md z-10 overflow-hidden p-1">
+              <div className="relative w-full h-full">
+                <Image
+                  src={exp.company === "CoinDCX" ? "/images/coindcx-square.png" : "/images/flipkart-icon.png"}
+                  alt={exp.company}
+                  fill
+                  sizes="40px"
+                  className="object-contain"
+                />
+              </div>
             </span>
 
-            {/* Experience card */}
-            <div className="p-8 rounded-2xl glass-panel relative border border-slate-800 hover:border-cyan-500/20 transition-all duration-300">
-              {/* Corner decoration glow */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-500/5 to-transparent blur-xl pointer-events-none" />
-
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            {/* Experience Card */}
+            <div className="p-7 sm:p-9 rounded-3xl bg-white border border-sky-200 hover:border-sky-400 transition-all duration-300 shadow-md hover:shadow-lg">
+              {/* Header: Role & Organization */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div>
-                  <h3 className="text-2xl font-extrabold font-title text-white">
+                  <span className="px-3 py-0.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-semibold inline-block mb-2">
+                    {index === 0 ? "Current Role" : "Completed Internship"}
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-bold font-title text-slate-900">
                     {exp.role}
                   </h3>
-                  <div className="flex items-center gap-2 text-cyan-400 font-semibold mt-1">
-                    <span className="text-lg">{exp.company}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-700" />
-                    <span className="text-slate-400 text-sm font-normal">{exp.location}</span>
+                  <div className="flex items-center gap-2.5 text-sky-600 font-bold mt-1 text-base">
+                    {exp.company === "CoinDCX" ? (
+                      <div className="relative h-5 w-20 shrink-0">
+                        <Image
+                          src="/images/coindcx-wordmark.png"
+                          alt="CoinDCX"
+                          fill
+                          sizes="80px"
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <div className="relative w-5 h-5 rounded-md overflow-hidden shrink-0 border border-slate-100 bg-white">
+                          <Image
+                            src="/images/flipkart-icon.png"
+                            alt="Flipkart"
+                            fill
+                            sizes="20px"
+                            className="object-contain"
+                          />
+                        </div>
+                        <span>{exp.company}</span>
+                      </div>
+                    )}
+                    <span className="text-slate-300">•</span>
+                    <span className="text-slate-500 text-xs sm:text-sm font-normal">{exp.location}</span>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-4 text-xs font-semibold text-slate-400">
-                  <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-900/60 border border-slate-800">
-                    <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-700">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <Calendar className="w-3.5 h-3.5 text-sky-600" />
                     <span>{exp.duration}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-900/60 border border-slate-800">
-                    <MapPin className="w-3.5 h-3.5 text-blue-500" />
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200">
+                    <MapPin className="w-3.5 h-3.5 text-amber-500" />
                     <span>{exp.location}</span>
                   </div>
                   {exp.certificateLink && (
@@ -64,41 +119,35 @@ export default function Experience() {
                       href={exp.certificateLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 transition-all"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-800 hover:bg-amber-100 transition-all font-semibold"
                     >
-                      <span>🃄 Certificate</span>
+                      <span>Certificate</span>
+                      <ExternalLink className="w-3 h-3" />
                     </a>
                   )}
                 </div>
               </div>
 
               {/* Achievements Bullet List */}
-              <ul className="space-y-4 mb-8 text-slate-300 text-base leading-relaxed">
+              <ul className="space-y-3 mb-6 text-slate-700 text-sm sm:text-base leading-relaxed">
                 {exp.achievements.map((ach, achIndex) => (
-                  <motion.li
-                    key={achIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: achIndex * 0.1 }}
-                    className="flex items-start gap-3"
-                  >
-                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                  <li key={achIndex} className="flex items-start gap-2.5">
+                    <CheckCircle className="w-4 h-4 text-sky-600 shrink-0 mt-1" />
                     <span>{ach}</span>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
 
               {/* Technologies Badges */}
-              <div>
-                <p className="text-xs uppercase tracking-widest text-slate-500 font-bold mb-3">
-                  Key Technologies Deployed:
+              <div className="pt-5 border-t border-slate-100">
+                <p className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-2.5">
+                  Technologies Applied:
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {exp.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3.5 py-1.5 rounded-lg bg-slate-950/60 border border-slate-800/80 text-xs font-medium text-slate-300 hover:text-white hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-300 cursor-default"
+                      className="px-3 py-1 rounded-lg bg-sky-50 border border-sky-100 text-xs font-semibold text-sky-800"
                     >
                       {skill}
                     </span>
